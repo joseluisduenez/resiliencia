@@ -7,9 +7,9 @@
  	<bean id="dataSource"
 		class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="org.postgresql.ds.PGPoolingDataSource" />
-		<property name="jdbcUrl" value="jdbc:postgresql://pgmp.binbit.com:5432/qa_ooredoo" />
-		<property name="user" value="qa_ooredoo" />
-		<property name="password" value="PROD_qa_0R3do" />
+		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/resilienciadb" />
+		<property name="user" value="postgres" />
+		<property name="password" value="00001234" />
 		<property name="maxPoolSize" value="30" />
  	    <property name="minPoolSize" value="20" />
  	    <property name="initialPoolSize" value="0" />
@@ -18,5 +18,25 @@
  	     
  	     
 	</bean>
-
+    <bean id="sessionFactory"
+      class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource"
+          ref="dataSource"/>
+        <property name="packagesToScan"
+          value="com.app.resilicencia.model"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">
+                    create
+                </prop>
+                <prop key="hibernate.dialect">
+					org.hibernate.dialect.PostgreSQL82Dialect
+                </prop>
+            </props>
+        </property>
+    </bean>
+     <bean id="txManager"
+      class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 </beans>
