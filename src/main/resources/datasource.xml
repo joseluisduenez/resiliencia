@@ -7,7 +7,7 @@
  	<bean id="dataSource"
 		class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="org.postgresql.ds.PGPoolingDataSource" />
-		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/resilienciadb" />
+		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/postgres" />
 		<property name="user" value="postgres" />
 		<property name="password" value="00001234" />
 		<property name="maxPoolSize" value="30" />

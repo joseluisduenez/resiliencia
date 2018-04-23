@@ -1,15 +1,30 @@
 <HTML>
 	<head>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="/css/bootstrap.min.css" >
 		<script src="/js/angular1.6.4.min.js"></script>
+		<script src="/js/angular-route1.6.4.js"></script>
+		
+		<script src="/js/bootstrap.min.js"></script>
+		
+		<script src="/js/routing/routing.js"></script>
+				<script src="/js/controllers/loginController.js"></script>
+		
 		<style>
 		  .center {text-align: center; margin-left: auto; margin-right: auto; margin-bottom: auto; margin-top: auto;}
 		</style>
+		
 	</head>
 	<BODY>
-		 <div ng-app="">
-		  <p>Name : <input type="text" ng-model="name"></p>
-		  <h1>Hello {{name}}</h1>
+		 <div ng-app="resiliencia" >
+		 <div ng-view></div>
+		 
+		  
+<ul>
+  <li ng-repeat="x in names">
+    {{ x.name + ', ' + x.country }}
+  </li>
+</ul>
+
 		</div>
 	</BODY>
 </HTML>
