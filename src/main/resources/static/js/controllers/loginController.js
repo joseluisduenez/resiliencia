@@ -8,6 +8,8 @@ app.controller('loginController', function($scope,$window,$http,$rootScope) {
 	}
 	$scope.loginError	=	false;
 	$scope.login =	function(){
+		//$window.location.href = 'html/register.htm';
+
 		console.log("username: "+$scope.username)
 		console.log("password: "+$scope.password)
 		$http.get("/user/login?username="+$scope.username+"&pwd="+$scope.password)

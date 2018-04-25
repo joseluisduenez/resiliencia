@@ -11,8 +11,9 @@ app.config(function($routeProvider) {
         controller  : 'mainController'
 
     })
-    .when("/green", {
-        templateUrl : "green.htm"
+    .when("/register", {
+        templateUrl : "html/register.htm",
+        controller  : 'mainController'
     })
     .when("/blue", {
         templateUrl : "blue.htm"
