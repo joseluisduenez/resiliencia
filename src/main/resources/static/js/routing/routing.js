@@ -1,4 +1,4 @@
-var app = angular.module("resiliencia", ["ngRoute"]);
+var app = angular.module("resiliencia", ["ngRoute",'ngMaterial','base64']);
 app.config(function($routeProvider) {
 	console.log("inside ngroute")
     $routeProvider
@@ -6,16 +6,9 @@ app.config(function($routeProvider) {
         templateUrl : "html/login.htm",
         controller  : 'loginController'
     })
-    .when("/main", {
-        templateUrl : "html/main.htm",
-        controller  : 'mainController'
-
-    })
+    
     .when("/register", {
         templateUrl : "html/register.htm",
-        controller  : 'mainController'
-    })
-    .when("/blue", {
-        templateUrl : "blue.htm"
+        controller  : 'registerController'
     });
 });

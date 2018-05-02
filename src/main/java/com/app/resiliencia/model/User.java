@@ -3,45 +3,48 @@ package com.app.resiliencia.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+ 
 
  
-@Entity
+ 
 
 public class User  implements Serializable {
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+ 
+    private Integer id;
+ 
     private Date createdAt;
-    @Column(nullable = false)
-    private String name;
-    @Column(nullable = false)
-    private String password;
-    @Column(nullable = false)
-     private Integer role;
-    private Integer status;
-
+     private String name;
+     private String email;
+	 private String password;
+	 private Integer role;
+	 private String since;
+	 private Integer status; 
+     public String getSince() {
+		return since;
+	}
+	public void setSince(String since) {
+		this.since = since;
+	}
+ 
+  
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public Integer getStatus() {
 		return status;
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Date getCreatedAt() {

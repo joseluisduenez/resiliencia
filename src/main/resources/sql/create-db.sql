@@ -1,10 +1,17 @@
 
  CREATE TABLE RS_USER (
-    id SERIAL NOT NULL PRIMARY KEY,
+    id int NOT NULL PRIMARY KEY,
     createdAt timestamp,
     name 		TEXT,
+    email		TEXT,
  	password	TEXT,
  	role 	int,
  	status int
  	
 );
+/*
+ * Role 0 admin
+ * Role 1 user
+ * status 0 inactive
+ * status 1 active
+ */*/

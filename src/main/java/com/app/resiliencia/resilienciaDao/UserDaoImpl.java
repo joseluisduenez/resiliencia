@@ -46,20 +46,24 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
-		final String sql = "INSERT INTO rs_user ( createdAt, name, "
+		final String sql = "INSERT INTO rs_user (id, createdAt, name,email, "
         		+ "password, role, status"
-        		+ ")  VALUES ( ?, ?, ?, ?, ?)";
+        		+ ")  VALUES ( ?,?,?, ?, ?, ?, ?)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
     	jdbcTemplate.update(
     	    new PreparedStatementCreator() {
     	        public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
     	            PreparedStatement pst =
     	                con.prepareStatement(sql, new String[] {"id"});
-     	            pst.setTimestamp(1, new java.sql.Timestamp(new Date().getTime()));
-     	            pst.setString(2, user.getName()==null?"":user.getName());
-     	            pst.setString(3, user.getPassword()==null?"":user.getPassword());
-     	            pst.setInt(4, user.getRole()==null?0:user.getRole());
-     	            pst.setInt(5, user.getStatus());
+     	            pst.setInt(1, user.getId());
+
+     	            pst.setTimestamp(2, new java.sql.Timestamp(new Date().getTime()));
+     	            pst.setString(3, user.getName()==null?"":user.getName());
+     	            pst.setString(4, user.getEmail()==null?"":user.getEmail());
+
+     	            pst.setString(5, user.getPassword()==null?"":user.getPassword());
+     	            pst.setInt(6, user.getRole()==null?0:user.getRole());
+     	            pst.setInt(7, user.getStatus());
      	            return pst;
     	        }
     	    },
@@ -108,6 +112,14 @@ public class UserDaoImpl implements UserDao {
 		
 		
 		return User;
+	}
+
+	@Override
+	public Integer getLastId() {
+		// TODO Auto-generated method stub
+		Integer id = (Integer) jdbcTemplate.queryForObject("SELECT (max(id)+1) FROM  rs_user ",
+				new Object[] { },   Integer.class );
+		return id;
 	}
 
 }

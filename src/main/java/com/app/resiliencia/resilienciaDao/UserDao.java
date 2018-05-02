@@ -10,6 +10,6 @@ public interface UserDao {
 	public void updateUser(User user);
 	public void deleteUser(Integer id);
 	public User userAllowed(String name, String pwd);
-	
+	public Integer getLastId();
 	
 }
