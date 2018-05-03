@@ -74,15 +74,15 @@
  			 
 			<!--  <link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
 <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script> -->
-  <link rel="stylesheet"; href="https://cdnjs.cloudflare.com/ajax/libs/ng-table/0.3.1/ng-table.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-table/0.3.1/ng-table.min.js"></script>  
+		 <link rel="stylesheet"; href="/css/ng-table.min.css">
+		 <script src="/js/ng-table.min.js"></script>  
 	   	 <script src="/js/angular-base64.js"></script>
 		 <script src="/js/routing/routing-main.js"></script>
 		 <script src="/js/controllers/mainController.js"></script>
 		 <script src="/js/controllers/adminController.js"></script>
-    <link href="https://ziscloud.github.io/angular-bootstrap-toggle/css/angular-bootstrap-toggle.min.css"
+    <link href="/css/angular-bootstrap-toggle.min.css"
                     rel="stylesheet">            
-    <script src="https://ziscloud.github.io/angular-bootstrap-toggle/js/angular-bootstrap-toggle.min.js"></script>
+    <script src="/js/angular-bootstrap-toggle.min.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
