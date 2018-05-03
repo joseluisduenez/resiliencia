@@ -3,6 +3,7 @@ app.controller('mainController', function($scope,$window,$http,$rootScope) {
  	$rootScope.user	=	"";
  	$scope.isAdmin	=	false;
 	$scope.loginError	=	false;
+
 	$http.get("/user/getUser")
     .then(function(response) {
     	$rootScope.user	= response.data;

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Login Form</title>
+  <title>Recover Password</title>
   
 
   
@@ -69,7 +69,8 @@
 
     </style>
 
-  		<link rel="stylesheet" href="/css/login.css" >
+  <link rel="stylesheet" href="/css/login.css" >
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
 </head>
@@ -100,30 +101,23 @@
     <body class="text-center">
     <form class="form-signin">
       <img class="mb-4" src="/images/resiliencialogo.jpg" alt="" width="240" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesion</h1>
+      <h1 class="h3 mb-3 font-weight-normal">Recuperar contraseña.</h1>
+      
       <label for="inputEmail" class="sr-only">Correo Electronico</label>
-      <input type="text" ng-model="username"  id="inputEmail" class="form-control" placeholder="Correo Electronico" >
-      <label for="inputPassword" class="sr-only">Contraseña</label>
-      <input type="password" id="inputPassword" ng-model="password" class="form-control" placeholder="Contraseña" >
+      <input type="email" id="inputEmail" ng-model="email" class="form-control" placeholder="Correo Electronico" >
 <!--       <div class="checkbox mb-3"> -->
 <!--         <label> -->
 <!--           <input type="checkbox" value="remember-me"> Remember me -->
 <!--         </label> -->
 <!--       </div> -->
-      <button class="btn btn-lg btn-primary btn-block"  ng-click="login()" type="submit">Entrar.</button>
-       
-          <div    class="mt-5 mb-3" style="color:white;">
-        	<p style="margin-top:-40px;">Si no tienes cuenta <a href="#!register">haz click aqui</a> para registrarte.</p>
-        	
-        </div>
-         <div    class="mt-5 mb-3" style="color:white;">
-        	<p style="margin-top:-40px;">  <a href="#!recoverPwd">Olvidaste tu contraseña?</a> </p>
-        </div>
-        <div    ng-show="loginError" class="mt-5 mb-3 text-muted alert alert-danger"  >
-        <br/>
-        	 <p style="color:#FFFFFF;">Usuario o contrasena incorrecta </p>
-        </div>
-    
+<br/>
+      <button class="btn btn-lg btn-primary btn-block"  ng-click="recover()" type="submit">Recuperar.</button>
+         
+
+        <div    ng-show="notFilledFields" class="mt-5 mb-3 text-muted alert alert-danger">
+        	Porfavor introduce correo electronico        </div>
+     <div    ng-show="emailNotValid" class="mt-5 mb-3 text-muted alert alert-danger">
+        	Porfavor introduce un correo electronico valido        </div>
      </form>
   </body>
   

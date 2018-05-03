@@ -1,4 +1,4 @@
-var app = angular.module("resiliencia-main", ["ngRoute",'ngMaterial','base64','ngAnimate', 'ngMessages']);
+var app = angular.module("resiliencia-main", ["ngRoute",'ngMaterial','base64','ngAnimate', 'ngMessages','ui.toggle','ngTable']);
 app.config(function($routeProvider) {
 	console.log("inside ngroute")
     $routeProvider

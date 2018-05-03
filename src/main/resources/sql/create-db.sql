@@ -9,6 +9,7 @@
  	status int
  	
 );
+ALTER TABLE RS_USER ADD CONSTRAINT constraint_name UNIQUE (email);
 /*
  * Role 0 admin
  * Role 1 user

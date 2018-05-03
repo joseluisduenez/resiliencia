@@ -15,6 +15,7 @@
 			 <script src="/js/controllers/loginController.js"></script>
 			 <script src="/js/controllers/registerController.js"></script>
 			 <script src="/js/controllers/mainController.js"></script>
+			 <script src="/js/controllers/recoverPwdController.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

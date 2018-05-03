@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> getUsers() {
 		// TODO Auto-generated method stub
-	    List<User> Users =  jdbcTemplate.query("select * from RS_USER  ",
+	    List<User> Users =  jdbcTemplate.query("select * from RS_USER where id >1 order by createdAt desc ",
                 new Object[] {  }, new BeanPropertyRowMapper<User>(User.class));
 
         return Users;
@@ -42,7 +42,12 @@ public class UserDaoImpl implements UserDao {
 				new Object[] { id },  new BeanPropertyRowMapper<User>(User.class));
 		return User;		
 	}
-
+	@Override
+	public User getUserByEmail(String email) {
+		User User = (User) jdbcTemplate.queryForObject("SELECT * FROM rs_user where email = ? ",
+				new Object[] { email.trim() },  new BeanPropertyRowMapper<User>(User.class));
+		return User;		
+	}
 	@Override
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
@@ -100,7 +105,7 @@ public class UserDaoImpl implements UserDao {
 		User User = null;
 		// TODO Auto-generated method stub
 		try {
-			 User = (User) jdbcTemplate.queryForObject("SELECT * FROM  rs_user where name = ? and password = ?",
+			 User = (User) jdbcTemplate.queryForObject("SELECT * FROM  rs_user where email = ? and password = ?",
 					new Object[] { name,pwd },  new BeanPropertyRowMapper<User>(User.class));
 //			 if(User!=null)
 //					if(User.getStatus().equals(1))

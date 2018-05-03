@@ -22,10 +22,8 @@ app.controller('loginController', function($scope,$window,$http,$rootScope,$base
 	    		var us = response.data.user.email;
 	    		var bs = response.data.user.pwd;
 	    		var dec = $base64.encode($scope.username+"_"+$scope.password)
-	    		if(response.data.user.role == 0)
 	    			$window.location.href = '/main';
-	    		else if(response.data.user.role == 1)
-	    			$window.location.href = 'html/adminMain.htm';
+	    		 
 
 	    	}
 	    	else{

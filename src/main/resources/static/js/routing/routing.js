@@ -6,9 +6,14 @@ app.config(function($routeProvider) {
         templateUrl : "html/login.htm",
         controller  : 'loginController'
     })
-    
+     .when("/recoverPwd", {
+        templateUrl : "html/recoverPwd.htm",
+        controller  : 'recoverPwdController'
+    })
     .when("/register", {
         templateUrl : "html/register.htm",
         controller  : 'registerController'
     });
 });
+
+ 

@@ -6,6 +6,7 @@ public interface UserDao {
 
 	public List<User> getUsers();
 	public User getUserById(Integer id);
+	public User getUserByEmail(String email);
 	public void addUser(User user);
 	public void updateUser(User user);
 	public void deleteUser(Integer id);

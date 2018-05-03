@@ -93,6 +93,55 @@ public class UserController{
 	return user;
 	}
 	
+	@RequestMapping(value = "/activateUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Integer activateUser(
+			@RequestParam("id") final Integer id,
+			HttpSession session
+			,HttpServletRequest request
+	) throws JsonProcessingException {
+		logger.info("activateUser " );
+		User user = userDao.getUserById(id);
+		if(user.getStatus().equals(1)) {
+			user.setStatus(0);
+		}else {
+			logger.info("Mail to: "+user.getEmail());
+			mail.sendMail("resilienciaapp@gmail.com", user.getEmail(), "Activacion de cuenta", "Tu usuario es: "+user.getEmail()+" y tu contrasena es: "+user.getPassword());
+			user.setStatus(1);
+		}
+		userDao.updateUser(user);
+	return 200;
+	}
+	 
+	
+	@RequestMapping(value = "/recover", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Integer recover(
+			@RequestParam("mail") final String mailto,
+			HttpSession session
+			,HttpServletRequest request
+	) throws JsonProcessingException {
+		logger.info("activateUser " );
+		User user = userDao.getUserByEmail(mailto);
+		logger.info("Mail to: "+user.getEmail());
+		mail.sendMail("resilienciaapp@gmail.com", user.getEmail(), "Informacion para acceder a portal. ", "Tu usuario es: "+user.getEmail()+" y tu contrasena es: "+user.getPassword());
+ 	 
+ 	return 200;
+	}
+	@RequestMapping(value = "/changeRole", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Integer changeRole(
+			@RequestParam("id") final Integer id,
+			HttpSession session
+			,HttpServletRequest request
+	) throws JsonProcessingException {
+		logger.info("changeRole " );
+		User user = userDao.getUserById(id);
+		if(user.getRole().equals(1)) {
+			user.setRole(0);
+		}else {
+			user.setRole(1);
+		}
+		userDao.updateUser(user);
+	return 200;
+	}
 	@RequestMapping(value = "/getUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getUsers(
  	 
