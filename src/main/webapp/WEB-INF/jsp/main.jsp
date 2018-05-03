@@ -42,7 +42,6 @@
  		 <link rel="stylesheet" href="/css/bootstrap.min.css" >
  		 <link href="/css/font-awesome.min.css" rel="stylesheet">
   		 <link href="/css/angular-datatables.css" rel="stylesheet">
- 		 
 		 <link href="/css/ionicons.min.css" rel="stylesheet" />
 		 <link href="/css/AdminLTE.min.css" rel="stylesheet" />
 		 <link href="/css/_all-skins.min.css" rel="stylesheet" />
@@ -52,37 +51,30 @@
 		  <link rel="stylesheet" href="/css/font.css">
 		  <link rel="stylesheet" href="/css/jquery.datatables.min.css">
  		  
-<script src="/js/pikaday.js"></script>
-
-<script src="/js/jquery.min.js"></script>
-<script src="/js/jquery-ui.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
- <script src="/js/adminlte.min.js"></script>
-  <script src="/js/daterangepicker.js"></script>
-
- 
- <script src="/js/jquery.dataTables.min.js"></script>
-		   <script src="/js/angular1.6.4.min.js"></script>  
-		   
-			 <script src="/js/angular-animate.min.js"></script>
-			 <script src="/js/angular-aria.min.js"></script>
-			 <script src="/js/angular-messages.min.js"></script>
- 			 <script src="/js/angular-material.min.js"></script>  
-			 <script src="/js/angular-route1.6.4.js"></script>  
-			 <link rel="stylesheet" href="/css/angular-material-1.9.css" >
- 			 <script src="/js/angular-datatables.min.js"></script>
- 			 
-			<!--  <link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
-<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script> -->
-		 <link rel="stylesheet"; href="/css/ng-table.min.css">
+		<script src="/js/pikaday.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/jquery-ui.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/adminlte.min.js"></script>
+		<script src="/js/daterangepicker.js"></script>
+		<script src="/js/jquery.dataTables.min.js"></script>
+		<script src="/js/angular1.6.4.min.js"></script>  
+		 <script src="/js/angular-animate.min.js"></script>
+		 <script src="/js/angular-aria.min.js"></script>
+		 <script src="/js/angular-messages.min.js"></script>
+		 <script src="/js/angular-material.min.js"></script>  
+		 <script src="/js/angular-route1.6.4.js"></script>  
+		 <link rel="stylesheet" href="/css/angular-material-1.9.css" >
+ 		 <script src="/js/angular-datatables.min.js"></script>
+		 <link rel="stylesheet" href="/css/ng-table.min.css">
 		 <script src="/js/ng-table.min.js"></script>  
 	   	 <script src="/js/angular-base64.js"></script>
 		 <script src="/js/routing/routing-main.js"></script>
 		 <script src="/js/controllers/mainController.js"></script>
 		 <script src="/js/controllers/adminController.js"></script>
-    <link href="/css/angular-bootstrap-toggle.min.css"
+    	 <link href="/css/angular-bootstrap-toggle.min.css"
                     rel="stylesheet">            
-    <script src="/js/angular-bootstrap-toggle.min.js"></script>
+    	 <script src="/js/angular-bootstrap-toggle.min.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
