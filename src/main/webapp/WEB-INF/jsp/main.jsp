@@ -50,7 +50,10 @@
 		  <link rel="stylesheet" href="/css/daterangepicker.css">
 		  <link rel="stylesheet" href="/css/font.css">
 		  <link rel="stylesheet" href="/css/jquery.datatables.min.css">
- 		  
+ 		  <script type="text/javascript">
+ 		
+ 		  var  formSent	=	${FORM_SENT};
+ 		  </script>
 		<script src="/js/pikaday.js"></script>
 		<script src="/js/jquery.min.js"></script>
 		<script src="/js/jquery-ui.min.js"></script>
@@ -72,6 +75,8 @@
 		 <script src="/js/routing/routing-main.js"></script>
 		 <script src="/js/controllers/mainController.js"></script>
 		 <script src="/js/controllers/adminController.js"></script>
+ 		 <script src="/js/controllers/addDocsController.js"></script>
+		 
     	 <link href="/css/angular-bootstrap-toggle.min.css"
                     rel="stylesheet">            
     	 <script src="/js/angular-bootstrap-toggle.min.js"></script>
@@ -85,11 +90,11 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>R</b>SL</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b></span>
+      <span class="logo-lg"><b>Resiliencia</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -383,8 +388,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="#!admin" ><i class="fa fa-circle-o"></i>Administrar Usuarios</a></li>
-            <li><a href="revisaInformacion"><i class="fa fa-circle-o"></i> Revisar Informacion</a></li>
+            <li class="active"><a href="#!admin" ><i class="fa fa-angle-right"></i>Administrar Usuarios</a></li>
+
           </ul>
         </li>
      
@@ -394,22 +399,31 @@
       
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-table"></i> <span>Reportes</span>
+            <i class="fa fa-table"></i> <span>Informacion General</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="informeComparacion"><i class="fa fa-circle-o"></i>Informe comparacion</a></li>
-            <li><a href=informeresumido><i class="fa fa-circle-o"></i>Informe Resumido</a></li>
-                        <li><a href="informedetallado"><i class="fa fa-circle-o"></i>Informe Detallado</a></li>
-                        <li><a href="informefacturacion"><i class="fa fa-circle-o"></i>Informe Facturacion</a></li>
-            
-            
+                   <li class="active"><a href="#!generalData" ><i class="fa fa-angle-right"></i>Datos Generales</a></li>
+                   <li class="active"><a href="#!whoarewe" ><i class="fa fa-angle-right"></i>Quienes Somos</a></li>
+                   
           </ul>
         </li>
       
-       
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i> <span>Detalles</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+                   <li class="active"><a href="#!addDocs" ><i class="fa fa-angle-right"></i>Documentos</a></li>
+
+                   
+          </ul>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

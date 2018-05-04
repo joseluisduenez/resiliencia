@@ -14,6 +14,8 @@ public class Messages {
 	public static String SERVICE_IS_EMPTY	=	"Service is empty";
 	public static String SERVICE_IS_NULL	=	"Service is null";
 	public static final String ERROR_MESSAGE	=	"message";
+	public static final String FORM_SENT	=	"FORM_SENT";
+	
 	public static final String GENERAL_ERROR	=	"General Error";
 	public static final String TIMWE_RESPONSE_NOTIFY_INVALID_MSISDN	=	"Invalid MSISDN";
 	public static final String TIMWE_RESPONSE_NOTIFY_INVALID_CREDENTIAL	=	"Invalid credential";

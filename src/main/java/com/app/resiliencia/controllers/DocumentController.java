@@ -1,16 +1,25 @@
 package com.app.resiliencia.controllers;
+import java.util.Base64;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-
+import org.springframework.web.multipart.MultipartFile;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.app.resiliencia.dto.DocumentLoad;
 import com.app.resiliencia.dto.ResponseLogin;
 import com.app.resiliencia.model.*;
 import com.app.resiliencia.resilienciaDao.UserDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +39,8 @@ import javax.servlet.http.HttpSession;
 
 import com.app.resiliencia.service.*;
 @RestController
-@RequestMapping(value={"/user"})
-public class UserController{
+@RequestMapping(value={"/document"})
+public class DocumentController{
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -44,53 +53,33 @@ public class UserController{
 	UserDao userDao;
 	@Autowired
 	MailMail mail;
-	@RequestMapping(value = "/login", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseLogin login(
- 			@RequestParam("username") final String username,
-			@RequestParam("pwd") final String pwd,
-			HttpSession session
-			,HttpServletRequest request
-	) throws JsonProcessingException {
-		logger.info("login: "+request.getQueryString());
-		ResponseLogin response = new ResponseLogin();
-		User User	=	userDao.userAllowed(username, pwd);
-	    String cookie = session.getId();
-		
-	        logger.info("JSESSION: "+cookie);
-		 if(User!=null) {
-			 SimpleDateFormat dt1 = new SimpleDateFormat("MMMMM. yyyy");
- 			 User.setSince(dt1.format(User.getCreatedAt()));
-
-			 if(User.getStatus().equals(1)) {
-				response.setAllowed(true);
-			    session.setAttribute("allowed", true);
-			    session.setAttribute("User", User);
-
-			 }
-			 response.setUser(User);
-		 }else {
-			 response.setAllowed(false);
-			 session.setAttribute("allowed", false);
-
-		 }
-			 
-		
-	 
-	return response;
-	}
+ 
 	
-	@RequestMapping(value = "/getUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public User getUser(
- 	 
+	@RequestMapping(value = "/addDoc", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Integer addDoc(
+			@RequestParam("file") MultipartFile file,
 			HttpSession session
 			,HttpServletRequest request
-	) throws JsonProcessingException {
-		logger.info("get User: "+request.getQueryString());
- 		  String cookie = session.getId();
-	        logger.info("JSESSION: "+cookie);
+	) throws IOException {
+		logger.info("Bef decode: "+file.getOriginalFilename());
+		logger.info("addDoc  : "+new String(Base64.getDecoder().decode(file.getOriginalFilename())));
+		DocumentLoad data = new Gson().fromJson(new String(Base64.getDecoder().decode(file.getOriginalFilename())), DocumentLoad.class);
+
+		if(file.isEmpty())
+			logger.info("File is empty");
+		else {
+			logger.info("File is not empty File is: ");
 	        User user =	(User) session.getAttribute("User");
+	        data.setFileName(data.getFileName().substring(12));
+	    	data.setFileName(data.getFileName().replaceAll("\\s+","_"));
+	    	 byte[] bytes = file.getBytes();
+	            Path path = Paths.get("/home/support/appImages/" + data.getFileName());
+	            Files.write(path, bytes);
+	        logger.info("El nombre real es: "+data.getFileName());
+		}
+ 		  
 	 
-	return user;
+	return 200;
 	}
 	
 	@RequestMapping(value = "/activateUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

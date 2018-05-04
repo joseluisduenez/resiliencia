@@ -35,7 +35,7 @@ app.controller('registerController', function($scope,$window,$http,$rootScope,$m
 					        
 					    ).then(function(i){
 			    			$window.location.href = '/';
-					      });;
+					      });
 	    }, function(response) {
 	        //Second function handles error
 	        console.log("Somenthing went wrong")

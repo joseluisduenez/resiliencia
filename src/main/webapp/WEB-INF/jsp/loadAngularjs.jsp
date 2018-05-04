@@ -23,6 +23,7 @@
     <meta name="author" content="">
 	</head>
 	<BODY ng-app="resiliencia" class="nav-md">
+	
  		 <div ng-view></div>
  	</BODY>
 </HTML>

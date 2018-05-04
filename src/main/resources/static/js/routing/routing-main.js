@@ -5,10 +5,21 @@ app.config(function($routeProvider) {
     .when("/", {
         templateUrl : "html/main.htm",
         controller  : 'mainController'
+    }).when("/whoarewe", {
+        templateUrl : "html/whoarewe.htm",
+        controller  : 'whoareweController'
+    }).when("/addDocs", {
+        templateUrl : "html/addDocs.htm",
+        controller  : 'addDocsController'
     })
-    
+     .when("/generalData", {
+        templateUrl : "html/generalData.htm",
+        controller  : 'generalDataController'
+    })
     .when("/admin", {
         templateUrl : "html/admin.htm",
         controller  : 'adminController'
     });
 });
+
+ 

@@ -3,6 +3,9 @@ app.controller('mainController', function($scope,$window,$http,$rootScope) {
  	$rootScope.user	=	"";
  	$scope.isAdmin	=	false;
 	$scope.loginError	=	false;
+	console.log("EL valor de formSent: "+formSent)
+	if(formSent)
+		$window.location.href = '#!addDocs';
 
 	$http.get("/user/getUser")
     .then(function(response) {
