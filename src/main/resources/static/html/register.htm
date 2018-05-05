@@ -103,14 +103,16 @@
       <img class="mb-4" src="/images/resiliencialogo.jpg" alt="" width="240" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Registrarse para Crear Cuenta</h1>
       <label for="inputName" class="sr-only">Name</label>
-      <input type="text" ng-model="name"  id="inputName" class="form-control" placeholder="Nombre" >
+      <input type="text" ng-model="name"  id="inputName" class="form-control" placeholder="Nombre de Fundacion" >
+            <input type="text" ng-model="pwd"  id="inputName" class="form-control" placeholder="Password" >
+      
+      <input type="number" ng-model="tel"  id="inputName" class="form-control" placeholder="Teléfono" >
       <label for="inputEmail" class="sr-only">Correo Electronico</label>
       <input type="email" id="inputEmail" ng-model="email" class="form-control" placeholder="Correo Electronico" >
-<!--       <div class="checkbox mb-3"> -->
-<!--         <label> -->
-<!--           <input type="checkbox" value="remember-me"> Remember me -->
-<!--         </label> -->
-<!--       </div> -->
+      <label for="inputEmail" class="sr-only">Comment</label>
+      <br/>
+	<textarea class="form-control" ng-model="comment"rows="5"  placeholder="Comentario: Favor de capturar su Institución y el motivo por el que se registra" id="comment"></textarea>
+ 
 <br/>
       <button class="btn btn-lg btn-primary btn-block"  ng-click="register()" type="submit">Registrarse.</button>
          
@@ -119,6 +121,9 @@
         	Porfavor introduce Nombre y correo electronico        </div>
      <div    ng-show="emailNotValid" class="mt-5 mb-3 text-muted alert alert-danger">
         	Porfavor introduce un correo electronico valido        </div>
+        	 <div    ng-show="pwdNotValid" class="mt-5 mb-3 text-muted alert alert-danger">
+        	La contrasena debe ser mayor a 8 digitos, letras y numeros son permitidos.       </div>
+        	 
      </form>
   </body>
   

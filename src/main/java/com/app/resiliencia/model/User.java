@@ -20,8 +20,37 @@ public class User  implements Serializable {
 	 private String password;
 	 private Integer role;
 	 private String since;
-	 private Integer status; 
-     public String getSince() {
+	 private Integer status;
+	 private String fileName;
+	 private String documentName;
+	 private String comments;
+	 private Integer telefono;
+	 
+     public Integer getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(Integer telefono) {
+		this.telefono = telefono;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public String getDocumentName() {
+		return documentName;
+	}
+	public void setDocumentName(String documentName) {
+		this.documentName = documentName;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+	public String getSince() {
 		return since;
 	}
 	public void setSince(String since) {

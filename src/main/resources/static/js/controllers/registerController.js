@@ -1,19 +1,35 @@
-app.controller('registerController', function($scope,$window,$http,$rootScope,$mdDialog) {
+app.controller('registerController', function($scope,$window,$http,$rootScope,$mdDialog,$timeout) {
 	console.log("Inside register controller");
 	$scope.email	=	"";
 	$scope.name		=	"";
+	$scope.tel	=	"";
+	$scope.comment		=	"";
+	$scope.pwd	=	"";
+	
 	$scope.notFilledFields	=	false;
 	$scope.emailNotValid	=	false;
+	$scope.pwdNotValid	=	false;
 
+	var avoidDouble	=	false;
+	
 	$scope.register =	function(){
-		console.log("email value: "+$scope.email)
-		console.log("name value: "+$scope.name)
-		 
-		if($scope.email == "" || $scope.name == ""){
+		$timeout(function () {
+			avoidDouble	=	false;
+	    }, 2000);
+		if($scope.pwd.length <8){
+			$scope.pwdNotValid	=	true;
+				return;
+		}
+		if(avoidDouble==false){
+			avoidDouble=true;
+			console.log("email value: "+$scope.email)
+			console.log("name value: "+$scope.name)
+		if($scope.email == "" || $scope.name == ""|| $scope.tel == ""|| $scope.pwd == ""|| $scope.comment == ""){
 			console.log("Inside email vacio")
 			$scope.notFilledFields	=	true;
 				return;
 		}
+			
 		$scope.notFilledFields	=	false;
 
 		if(!validateEmail($scope.email)){
@@ -21,7 +37,7 @@ app.controller('registerController', function($scope,$window,$http,$rootScope,$m
 			return;
 		}
 		$scope.emailNotValid	=	false;
-		$http.get("/user/register?username="+$scope.name+"&mail="+$scope.email)
+		$http.get("/user/register?username="+$scope.name+"&mail="+$scope.email+"&tel="+$scope.tel+"&pwd="+$scope.pwd+"&comment="+$scope.comment)
 	    .then(function(response) {
 	    	console.log(response.data)
 	    	   $mdDialog.show(
@@ -50,8 +66,10 @@ app.controller('registerController', function($scope,$window,$http,$rootScope,$m
 				        
 				    );
 	    });
+		}
+	
 		 
-		console.log("Campos validos...")
+		
 	}
 
 	function validateEmail(email) {

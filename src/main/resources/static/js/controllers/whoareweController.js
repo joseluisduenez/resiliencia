@@ -1,4 +1,4 @@
-app.controller('adminController', ['$scope','ngTableParams','$filter','$window','$http' ,function($scope,ngTableParams,$filter,$window,$http,$rootScope) {
+app.controller('whoareweController', ['$scope','ngTableParams','$filter','$window','$http' ,function($scope,ngTableParams,$filter,$window,$http,$rootScope) {
 	console.log("Inside admin controller");
 /*	 $scope.users = [{"id":1,"first_name":"Philip","last_name":"Kim","email":"pkim0@mediafire.com","country":"Indonesia","ip_address":"29.107.35.8"},
          {"id":2,"first_name":"Judith","last_name":"Austin","email":"jaustin1@mapquest.com","country":"China","ip_address":"173.65.94.30"},

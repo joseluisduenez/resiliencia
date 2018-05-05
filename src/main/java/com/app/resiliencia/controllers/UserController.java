@@ -154,6 +154,21 @@ public class UserController{
 	 
 	return userDao.getUsers();
 	}
+	@RequestMapping(value = "/validateByEmail", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Integer validateByEmail(
+			@RequestParam("email") final String email,
+			HttpSession session
+			,HttpServletRequest request
+	) throws JsonProcessingException {
+		logger.info("get Users: " );
+		if(userDao.getUserByEmail(email)==null)
+				{
+			return 0;
+				}
+		else
+			return 1;
+	
+	}
 	@RequestMapping(value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String logout(
  		
@@ -169,7 +184,11 @@ public class UserController{
 	@RequestMapping(value = "/register", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Integer register(
  			@RequestParam("username") final String username,
-			@RequestParam("mail") final String mailto
+			@RequestParam("mail") final String mailto,
+			@RequestParam("tel") final Integer tel,
+			@RequestParam("pwd") final String pwd,
+			@RequestParam("comment") final String comment
+
 
 			,HttpServletRequest request
 	) throws JsonProcessingException {
@@ -184,8 +203,10 @@ public class UserController{
 		User.setCreatedAt(new Date());
 		User.setEmail(mailto);
 		User.setName(username);
-		User.setPassword(uuid.toString().substring(0,8));
+		User.setPassword(pwd);
+		User.setTelefono(tel);
 		User.setRole(1);
+		User.setComments(comment);
 		User.setStatus(0);
 		userDao.addUser(User);
 	return 200;
@@ -196,22 +217,5 @@ public class UserController{
  
 
 
- 
-
-	@RequestMapping(value = "/confirm_pin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String confirm_pin(
-			@RequestParam("id_attempt") final String id_attempt,
-			@RequestParam("id_carrier") final String id_carrier,
-			@RequestParam("id_service_type") final String id_service_type,
-			@RequestParam("id_promo") final String id_promo,
-			@RequestParam("id_channel") final String id_channel,
-			@RequestParam("pin") final String pin,
-			@RequestParam("msisdn") final String msisdn,
-			@RequestParam("id_service") final Integer id_service
-	) {
-
-
-		return null;
-	}
 
 }

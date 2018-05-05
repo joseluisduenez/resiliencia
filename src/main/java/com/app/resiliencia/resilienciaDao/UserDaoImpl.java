@@ -44,16 +44,22 @@ public class UserDaoImpl implements UserDao {
 	}
 	@Override
 	public User getUserByEmail(String email) {
-		User User = (User) jdbcTemplate.queryForObject("SELECT * FROM rs_user where email = ? ",
-				new Object[] { email.trim() },  new BeanPropertyRowMapper<User>(User.class));
+		User User = null;
+		try {
+			 User = (User) jdbcTemplate.queryForObject("SELECT * FROM rs_user where email = ? ",
+						new Object[] { email.trim() },  new BeanPropertyRowMapper<User>(User.class));
+		}catch(Exception e) {
+			
+		}
+		 
 		return User;		
 	}
 	@Override
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
 		final String sql = "INSERT INTO rs_user (id, createdAt, name,email, "
-        		+ "password, role, status"
-        		+ ")  VALUES ( ?,?,?, ?, ?, ?, ?)";
+        		+ "password,comments, telefono, role, status"
+        		+ ")  VALUES ( ?,?,?, ?, ?, ?, ?,?,?)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
     	jdbcTemplate.update(
     	    new PreparedStatementCreator() {
@@ -67,8 +73,12 @@ public class UserDaoImpl implements UserDao {
      	            pst.setString(4, user.getEmail()==null?"":user.getEmail());
 
      	            pst.setString(5, user.getPassword()==null?"":user.getPassword());
-     	            pst.setInt(6, user.getRole()==null?0:user.getRole());
-     	            pst.setInt(7, user.getStatus());
+     	            pst.setString(6, user.getComments()==null?"":user.getComments());
+
+     	            pst.setInt(7, user.getTelefono()==null?0:user.getTelefono());
+
+     	            pst.setInt(8, user.getRole()==null?0:user.getRole());
+     	            pst.setInt(9, user.getStatus());
      	            return pst;
     	        }
     	    },

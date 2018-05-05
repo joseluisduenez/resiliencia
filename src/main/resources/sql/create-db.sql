@@ -5,6 +5,9 @@
     name 		TEXT,
     email		TEXT,
  	password	TEXT,
+ 	comments	TEXT,
+
+ 	telefono 	int,
  	role 	int,
  	status int
  	

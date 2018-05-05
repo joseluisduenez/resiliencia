@@ -1,5 +1,6 @@
 package com.app.resiliencia.controllers;
 import java.util.Base64;
+import com.app.resiliencia.resilienciaDao.UserDocumentDao;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,6 +28,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,7 +55,8 @@ public class DocumentController{
 	UserDao userDao;
 	@Autowired
 	MailMail mail;
- 
+	 @Autowired 
+	 UserDocumentDao UserDocumentDao;
 	
 	@RequestMapping(value = "/addDoc", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Integer addDoc(
@@ -81,7 +84,30 @@ public class DocumentController{
 	 
 	return 200;
 	}
-	
+    @RequestMapping(value="attachedImageInfo",method = RequestMethod.GET)
+    public Integer attachedImageInfo(@RequestParam("docName") final String docName,@RequestParam("comments") final String comments, HttpSession session, 
+    		HttpServletRequest req,Model model) throws InterruptedException {
+        logger.info("attachedImageInfo");
+        User user =	null;
+        while(true) {
+        	user =  (User) session.getAttribute("User");
+        	if(user.getFileName()!=null)
+        		break;
+        }
+        UserDocument doc	=	new UserDocument();
+        doc.setId(UserDocumentDao.getLastId());
+        doc.setUserId(user.getId());
+        doc.setComments(comments);
+        doc.setDocName(docName);
+        doc.setFileName(user.getFileName());
+        doc.setStatus(1);
+        UserDocumentDao.addDocument(doc);
+        logger.info("Saving file... ");
+
+
+      
+       return 200;
+    }
 	@RequestMapping(value = "/activateUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Integer activateUser(
 			@RequestParam("id") final Integer id,

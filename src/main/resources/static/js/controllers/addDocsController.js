@@ -19,65 +19,20 @@ app.controller('addDocsController', ['$scope','ngTableParams','$filter','$window
 	}
  
 	$scope.save = function (form) {
-	    //if (!$scope.contactForm.$valid) return;
+		$http.get("/document/attachedImageInfo?docName="+$scope.docName+"&comments="+$scope.comments)
+	    .then(function(response) {
+	    	console.log(response.data)
 	    
-	    var url = form.attributes["target"];
-	    $log.debug(url);
+	    }, function(response) {
+	        //Second function handles error
+	        $scope.content = "Something went wrong";
+	        console.log("Somenthing went wrong")
+	    });	    
+ 	  
 	  
-	    $http
-	      .post(url, { email: $scope.email, name: $scope.name })
-	      .success(function (response) {
-	        $log.debug(response);
-	      })
+	  
 	    }
-	
-	documentEntity.fileComments	=	"";
+	 
 	
  
- 	$scope.sendFile =	function(){
-		console.log("Send file ")
-		var fi	=	document.getElementById("loadFile").value;
-		console.log("Fi is: "+fi)
-		if(fi==""){
-			 $mdDialog.show(
-				      $mdDialog.alert()
-				        .parent(angular.element(document.querySelector('#popupContainer')))
-				        .clickOutsideToClose(true)
-				        .title('Informacion')
-				        .textContent('Selecciona un archivo por favor.')
-				        .ariaLabel('Alert Dialog Demo')
-				        .ok('Salir')
-				        
-				    ).then(function(i){
-		    			
-
-				      });
-			 return;
-		}
-		console.log("Archivo seleccionado");	
-		var fd = new FormData();
-		var blob = new Blob([$scope.markdown], {type: 'multipart/form-data'});
-		documentEntity.fileName =	fi;
-		documentEntity.fileComments	=	$scope.comments;
-		documentEntity.documentName	=	$scope.docName;
-		var toS	=	$base64.encode(JSON.stringify(documentEntity))
-		console.log("Print..."+toS)	
-		var file = new File([blob],  toS);
-		console.log("File: "+file)
-		fd.append('file', file);
-		fd.append('from', 'markdown');
-		fd.append('to', 'pdf');
-		$http.post('/document/addDoc', fd, {
-		    transformRequest: angular.identity,
-		    headers: {'Content-Type': undefined},
-		    responseType: 'arraybuffer'
-		})
-		.success(function(response){
-		 // var b = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-		  //FileSaver.saveAs(b, 'abc.docx');
-		})
-		.error(function(res){
-		  console.log(res);
-		});
-	}
 }]);

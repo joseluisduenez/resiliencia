@@ -66,31 +66,25 @@ public class FrontController {
        return "loadAngularjs";
     }
     
+
 	@RequestMapping(value = "addDoc", method = RequestMethod.POST)
 	public String addDoc(
 			@RequestParam("file") MultipartFile file,
 			HttpSession session
 			,HttpServletRequest request,Model model
-	) throws IOException {
+	) throws IOException, InterruptedException {
 		logger.info("Bef decode: "+file.getOriginalFilename());
-		//StandardMultipartHttpServletRequest ff	=	(StandardMultipartHttpServletRequest) file;
-		//logger.info("addDoc  : "+new String(Base64.getDecoder().decode(file.getOriginalFilename())));
-		//DocumentLoad data = new Gson().fromJson(new String(Base64.getDecoder().decode(file.getOriginalFilename())), DocumentLoad.class);
-
-//		if(file.isEmpty())
-//			logger.info("File is empty");
-//		else {
-			logger.info("File is not empty File is: "+file.getName());
+		String fileName	=	file.getOriginalFilename();
+			logger.info("File is not empty File is: "+file.getOriginalFilename());
 	        User user =	(User) session.getAttribute("User");
-//	        data.setFileName(data.getFileName().substring(12));
-//	    	data.setFileName(data.getFileName().replaceAll("\\s+","_"));
+	        fileName	=	fileName.replaceAll("\\s+","_");
+	        user.setFileName(fileName);
+            session.setAttribute("User", user);
 	    	 byte[] bytes = file.getBytes();
-	            Path path = Paths.get("/home/support/appImages/testing.jpg" );
+	            Path path = Paths.get("/home/support/appImages/"+fileName);
 	            Files.write(path, bytes);
-	   //     logger.info("El nombre real es: "+data.getFileName());
-		
 	            model.addAttribute(Messages.FORM_SENT,true);
-
+	            Thread.sleep(3000L);
 	return "main";
 	}
 }
