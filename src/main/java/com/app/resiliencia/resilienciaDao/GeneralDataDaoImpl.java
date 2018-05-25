@@ -1,0 +1,95 @@
+package com.app.resiliencia.resilienciaDao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.app.resiliencia.model.Catalog;
+import com.app.resiliencia.model.GeneralData;
+import com.app.resiliencia.model.User;
+@Transactional
+@Repository
+public class GeneralDataDaoImpl implements GeneralDataDao {
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+	@Override
+	public GeneralData getDataByUserId(Integer id) {
+		// TODO Auto-generated method stub
+		GeneralData pr =  (GeneralData) jdbcTemplate.query("select * from RS_GENERAL_DATA where idUser= ?  ",
+	                new Object[] { id }, new BeanPropertyRowMapper<GeneralData>(GeneralData.class));
+
+	        return pr;	}
+
+	@Override
+	public void update(GeneralData GeneralData) {
+		// TODO Auto-generated method stub
+		final String sql = "UPDATE RS_GENERAL_DATA SET proyectoReciente = ?, nombre = ?, razonSocial = ?, rfc = ?, clasificationId = ?, fechaConstitucion = ?, inicioOperacion = ?,"
+				+ "propertyTypeId = ?, comentarios = ?, calle = ?, numero = ?, colonia =?, codigoPostal = ?, ciudadId =?, estadoId = ?, pais = ?, telefonoOficina =?, www=?,"
+				+ "email = ?, nombreDelContacto = ?, telefonoDeContacto =? , emailDeContacto = ?  WHERE id = ? ";
+		jdbcTemplate.update(sql,
+				GeneralData.getProyectoReciente(),GeneralData.getNombre(),GeneralData.getRazonSocial(),GeneralData.getRfc(),GeneralData.getClasificationId(),GeneralData.getFechaConstitucion()
+				,GeneralData.getInicioOperacion(),GeneralData.getPropertyTypeId(),GeneralData.getComentarios(),GeneralData.getCalle(),GeneralData.getNumero(),GeneralData.getColonia(),
+				GeneralData.getCodigoPostal(),GeneralData.getCiudadId(),GeneralData.getEstadoId(),GeneralData.getPais(),GeneralData.getTelefonoOficina(),GeneralData.getWww(),
+				GeneralData.getEmail(),GeneralData.getNombreDelContacto(),GeneralData.getTelefonoDeContacto(),GeneralData.getEmailDeContacto(),GeneralData.getIdUser());
+	}
+
+	@Override
+	public void add(GeneralData p) {
+		// TODO Auto-generated method stub
+		final String sql = "INSERT INTO RS_CITY_CATALOG (id, createdAt, idUser, proyectoReciente,nombre, razonSocial, rfc, clasificationId, fechaConstitucion,"
+				+ "inicioOperacion,propertyTypeId,comentarios,calle, numero, colonia, codigoPostal, ciudadId, estadoId, pais, telefonoOficina, www, email, "
+				+ "nombreDelContacto, telefonoDeContacto,  emailDeContacto   "+")  VALUES ( ?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?)";
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+    	jdbcTemplate.update(
+    	    new PreparedStatementCreator() {
+    	        public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+    	            PreparedStatement pst =
+    	                con.prepareStatement(sql, new String[] {"id"});
+     	            pst.setInt(1, p.getId());
+     	            pst.setTimestamp(2, new java.sql.Timestamp(new Date().getTime()));
+     	            pst.setInt(3, p.getIdUser());
+     	            pst.setString(4,p.getProyectoReciente());
+     	            pst.setString(5, p.getNombre());
+     	            pst.setString(6, p.getRazonSocial());
+    	            pst.setString(7, p.getRfc());
+    	            pst.setInt(8, p.getClasificationId());
+    	            pst.setTimestamp(9,  new java.sql.Timestamp(p.getFechaConstitucion().getTime()));
+    	            pst.setTimestamp(10, new java.sql.Timestamp(p.getInicioOperacion().getTime()));
+     	            pst.setInt(11, p.getPropertyTypeId());
+     	            pst.setString(12, p.getComentarios());
+     	            pst.setString(13, p.getCalle());
+     	            pst.setInt(14, p.getNumero());
+     	            pst.setString(15, p.getColonia());
+     	            pst.setInt(16, p.getCodigoPostal());
+     	            pst.setInt(17, p.getCiudadId());
+     	            pst.setInt(18, p.getEstadoId());
+     	            pst.setString(19, p.getPais());
+     	            pst.setInt(20, p.getTelefonoOficina());
+     	            pst.setString(21, p.getWww());
+     	            pst.setString(22, p.getEmail());
+     	            pst.setString(23, p.getNombreDelContacto());
+     	            pst.setInt(24, p.getTelefonoDeContacto());
+     	            pst.setString(25, p.getEmail());
+
+     	            return pst;
+    	        }
+    	    },
+    	    keyHolder);
+	}
+
+}

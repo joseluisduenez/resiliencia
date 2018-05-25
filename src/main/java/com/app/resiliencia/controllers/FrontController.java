@@ -49,6 +49,7 @@ public class FrontController {
     		   return "loadAngularjs";
        return "loadAngularjs";
     }
+    
     @RequestMapping(value="main",method = RequestMethod.GET)
     public String main( HttpSession session, HttpServletRequest req,Model model) {
         logger.info("main");
