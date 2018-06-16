@@ -154,6 +154,17 @@ public class UserController{
 	 
 	return userDao.getUsers();
 	}
+	@RequestMapping(value = "/getUsersRoleUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<User> getUsersRoleUser(
+ 	 
+			HttpSession session
+			,HttpServletRequest request
+	) throws JsonProcessingException {
+		logger.info("get Users: " );
+		 
+	 
+	return userDao.getUsersRoleUser();
+	}
 	@RequestMapping(value = "/validateByEmail", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Integer validateByEmail(
 			@RequestParam("email") final String email,

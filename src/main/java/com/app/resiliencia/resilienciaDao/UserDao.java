@@ -5,6 +5,8 @@ import com.app.resiliencia.model.*;
 public interface UserDao {
 
 	public List<User> getUsers();
+	public List<User> getUsersRoleUser();
+
 	public User getUserById(Integer id);
 	public User getUserByEmail(String email);
 	public void addUser(User user);

@@ -3,6 +3,8 @@ package com.app.resiliencia.resilienciaDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.resiliencia.model.Catalog;
 import com.app.resiliencia.model.GeneralData;
 import com.app.resiliencia.model.User;
+import com.app.resiliencia.util.Util;
 @Transactional
 @Repository
 public class GeneralDataDaoImpl implements GeneralDataDao {
@@ -30,30 +33,45 @@ public class GeneralDataDaoImpl implements GeneralDataDao {
 	@Override
 	public GeneralData getDataByUserId(Integer id) {
 		// TODO Auto-generated method stub
-		GeneralData pr =  (GeneralData) jdbcTemplate.query("select * from RS_GENERAL_DATA where idUser= ?  ",
+		GeneralData pr = null;
+		try {
+			pr =	(GeneralData) jdbcTemplate.queryForObject("select * from RS_GENERAL_DATA where idUser= ?  ",
 	                new Object[] { id }, new BeanPropertyRowMapper<GeneralData>(GeneralData.class));
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 
 	        return pr;	}
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		Integer pr =  (Integer) jdbcTemplate.queryForObject("select case when max(id) > 0 then max(id)+1 else 1 end as valor from RS_GENERAL_DATA ",
+	                new Object[] { }, Integer.class);
 
+	        return pr;	}
 	@Override
 	public void update(GeneralData GeneralData) {
 		// TODO Auto-generated method stub
 		final String sql = "UPDATE RS_GENERAL_DATA SET proyectoReciente = ?, nombre = ?, razonSocial = ?, rfc = ?, clasificationId = ?, fechaConstitucion = ?, inicioOperacion = ?,"
 				+ "propertyTypeId = ?, comentarios = ?, calle = ?, numero = ?, colonia =?, codigoPostal = ?, ciudadId =?, estadoId = ?, pais = ?, telefonoOficina =?, www=?,"
-				+ "email = ?, nombreDelContacto = ?, telefonoDeContacto =? , emailDeContacto = ?  WHERE id = ? ";
+				+ "email = ?, nombreDelContacto = ?, telefonoDeContacto =? , emailDeContacto = ?  WHERE idUser = ? ";
 		jdbcTemplate.update(sql,
-				GeneralData.getProyectoReciente(),GeneralData.getNombre(),GeneralData.getRazonSocial(),GeneralData.getRfc(),GeneralData.getClasificationId(),GeneralData.getFechaConstitucion()
-				,GeneralData.getInicioOperacion(),GeneralData.getPropertyTypeId(),GeneralData.getComentarios(),GeneralData.getCalle(),GeneralData.getNumero(),GeneralData.getColonia(),
+				GeneralData.getProyectoReciente(),GeneralData.getNombre(),GeneralData.getRazonSocial(),GeneralData.getRfc(),GeneralData.getClasificationId(),(GeneralData.getFechaConstitucion())
+				,(GeneralData.getInicioOperacion()),GeneralData.getPropertyTypeId(),GeneralData.getComentarios(),GeneralData.getCalle(),GeneralData.getNumero(),GeneralData.getColonia(),
 				GeneralData.getCodigoPostal(),GeneralData.getCiudadId(),GeneralData.getEstadoId(),GeneralData.getPais(),GeneralData.getTelefonoOficina(),GeneralData.getWww(),
 				GeneralData.getEmail(),GeneralData.getNombreDelContacto(),GeneralData.getTelefonoDeContacto(),GeneralData.getEmailDeContacto(),GeneralData.getIdUser());
 	}
 
+	
 	@Override
-	public void add(GeneralData p) {
+	public  void add(GeneralData p) {
 		// TODO Auto-generated method stub
-		final String sql = "INSERT INTO RS_CITY_CATALOG (id, createdAt, idUser, proyectoReciente,nombre, razonSocial, rfc, clasificationId, fechaConstitucion,"
+		final String sql = "INSERT INTO RS_GENERAL_DATA (id, createdAt, idUser, proyectoReciente,nombre, razonSocial, rfc, clasificationId, fechaConstitucion,"
 				+ "inicioOperacion,propertyTypeId,comentarios,calle, numero, colonia, codigoPostal, ciudadId, estadoId, pais, telefonoOficina, www, email, "
-				+ "nombreDelContacto, telefonoDeContacto,  emailDeContacto   "+")  VALUES ( ?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?)";
+				+ "nombreDelContacto, telefonoDeContacto,  emailDeContacto, clasificationName, propertyName  "+")  VALUES (?,?, ?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
     	jdbcTemplate.update(
     	    new PreparedStatementCreator() {
@@ -67,9 +85,9 @@ public class GeneralDataDaoImpl implements GeneralDataDao {
      	            pst.setString(5, p.getNombre());
      	            pst.setString(6, p.getRazonSocial());
     	            pst.setString(7, p.getRfc());
-    	            pst.setInt(8, p.getClasificationId());
-    	            pst.setTimestamp(9,  new java.sql.Timestamp(p.getFechaConstitucion().getTime()));
-    	            pst.setTimestamp(10, new java.sql.Timestamp(p.getInicioOperacion().getTime()));
+    	            pst.setInt(8, 0);
+    	            pst.setTimestamp(9,  new java.sql.Timestamp((p.getFechaConstitucion()).getTime()));
+    	            pst.setTimestamp(10, new java.sql.Timestamp((p.getInicioOperacion()).getTime()));
      	            pst.setInt(11, p.getPropertyTypeId());
      	            pst.setString(12, p.getComentarios());
      	            pst.setString(13, p.getCalle());
@@ -77,7 +95,7 @@ public class GeneralDataDaoImpl implements GeneralDataDao {
      	            pst.setString(15, p.getColonia());
      	            pst.setInt(16, p.getCodigoPostal());
      	            pst.setInt(17, p.getCiudadId());
-     	            pst.setInt(18, p.getEstadoId());
+     	            pst.setInt(18, 0);
      	            pst.setString(19, p.getPais());
      	            pst.setInt(20, p.getTelefonoOficina());
      	            pst.setString(21, p.getWww());
@@ -85,6 +103,8 @@ public class GeneralDataDaoImpl implements GeneralDataDao {
      	            pst.setString(23, p.getNombreDelContacto());
      	            pst.setInt(24, p.getTelefonoDeContacto());
      	            pst.setString(25, p.getEmail());
+     	            pst.setString(26, p.getClasificationName());
+     	            pst.setString(27, p.getPropertyName());
 
      	            return pst;
     	        }

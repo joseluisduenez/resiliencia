@@ -24,7 +24,9 @@
     email				TEXT,
     nombreDelContacto	TEXT,
     telefonoDeContacto	int,
-    emailDeContacto		TEXT
-    
+    emailDeContacto		TEXT,
+    clasificationName	TEXT,
+    stateName			TEXT,
+    propertyName		TEXT
  	
 );

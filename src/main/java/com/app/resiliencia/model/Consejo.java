@@ -15,6 +15,15 @@ public class Consejo {
 	private Date fechaFinal;
 	private String apellido;
 	private Date fechaDeNacimiento;
+	private String positionName;
+	
+	
+	public String getPositionName() {
+		return positionName;
+	}
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
 	private String rfc;
 	public Integer getId() {
 		return id;

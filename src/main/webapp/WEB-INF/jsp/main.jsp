@@ -76,7 +76,12 @@
 		 <script src="/js/controllers/mainController.js"></script>
 		 <script src="/js/controllers/adminController.js"></script>
  		 <script src="/js/controllers/addDocsController.js"></script>
-		 
+         <script src="/js/controllers/generalDataController.js"></script>
+         <script src="/js/controllers/whoareweController.js"></script>
+         <script src="/js/controllers/sustentabilidadController.js"></script>
+         <script src="/js/controllers/consejoController.js"></script>
+         <script src="/js/controllers/catalogoadminController.js"></script>
+
     	 <link href="/css/angular-bootstrap-toggle.min.css"
                     rel="stylesheet">            
     	 <script src="/js/angular-bootstrap-toggle.min.js"></script>
@@ -381,6 +386,15 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li ng-show="isAdmin" class="active treeview">
+          <a href="#!main">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+         
+        </li>
+        <li ng-show="isAdmin" class="active treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Administrador</span>
             <span class="pull-right-container">
@@ -389,8 +403,10 @@
           </a>
           <ul class="treeview-menu">
             <li class="active"><a href="#!admin" ><i class="fa fa-angle-right"></i>Administrar Usuarios</a></li>
-
+            <li class="active"><a href="#!catalogoadmin" ><i class="fa fa-angle-right"></i>Administrar Catalogos</a></li>
+           
           </ul>
+    
         </li>
      
     
@@ -407,7 +423,9 @@
           <ul class="treeview-menu">
                    <li class="active"><a href="#!generalData" ><i class="fa fa-angle-right"></i>Datos Generales</a></li>
                    <li class="active"><a href="#!whoarewe" ><i class="fa fa-angle-right"></i>Quienes Somos</a></li>
-                   
+                   <li class="active"><a href="#!sustentabilidad" ><i class="fa fa-angle-right"></i>Sustentabilidad</a></li>
+                   <li class="active"><a href="#!consejo" ><i class="fa fa-angle-right"></i>Consejo</a></li>
+
           </ul>
         </li>
       

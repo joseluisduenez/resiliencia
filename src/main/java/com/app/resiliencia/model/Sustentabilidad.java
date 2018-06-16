@@ -11,6 +11,15 @@ public class Sustentabilidad {
 	private Integer porcentajeAnual;
 	private String comentario;
 	private Integer status;
+	private String sourceName;
+	
+	
+	public String getSourceName() {
+		return sourceName;
+	}
+	public void setSourceName(String sourceName) {
+		this.sourceName = sourceName;
+	}
 	public Integer getId() {
 		return id;
 	}

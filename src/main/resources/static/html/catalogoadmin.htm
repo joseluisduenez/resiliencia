@@ -1,0 +1,97 @@
+ <!-- Content Header (Page header) -->
+ 
+    <section class="content-header">
+      <h1>
+              <div id="titulo">Administracion de Catalogos</div>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Administracion de Catalogos</li>
+      </ol>
+  </section>
+    <!-- /.content -->
+<br/>
+<br/>
+
+<div class="row">
+<div class="col-md-1">
+</div>
+<div class="col-md-10">
+	<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse">Administracion de Catalogos</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse in">
+      <div class="panel-body">
+		<form class="form-horizontal" >
+			  <div class="form-group">
+		    <label class="control-label col-sm-2"  >Elegir Catalogo:</label>
+		    <div class="col-sm-10"> 
+					
+					<select class="form-control" ng-model="catalogochoosed" ng-change="loadcatalog()">
+					  <option value="1">Catalogo Clasificacion</option>
+					  <option value="2">Catalogo Tipo Propiedad</option>
+					  <option value="3">Catalogo Puestos en el consejo</option>
+					  <option value="4" selected>Catalogo</option>
+					  					  <option value="5" selected>Catalogo Documentos de Institucion</option>
+					  					  <option value="6" selected>Catalogo Fuentes de Ingreso</option>
+					  					  <option value="7" selected>Catalogo Estatus Proyecto</option>
+					  				
+					  
+					</select>
+		    </div>
+		  </div>
+			<div class="form-group">
+		    <label class="control-label col-sm-2"  >Nombre registro:</label>
+		    <div class="col-sm-10"> 
+		      <input type="text" ng-model="namecatalog" class="form-control" id="pwd" placeholder="">
+		    </div>
+			</div>
+		 
+			  
+		</form>   
+     
+      </div>
+			<div class="panel-footer"></div>
+				<br/>
+			<br/>
+			 <button type="submit" id="submit"  name="submit" ng-click="save()" class="btn btn-primary pull-right">Agregar</button>
+			
+		</div>
+		<br/>
+		    <div id="collapse2" style="margin-top:20px;" class="panel-collapse collapse in">
+      <div class="panel-body">
+		<form class="form-horizontal" >
+		      <table ng-table="catalogsTable"  show-filter="true"class="table table-striped">
+          <tr ng-repeat="user in datat">
+              
+              <td data-title="'Nombre'" sortable="'sourceName'" filter="{ 'name': 'text' }" >
+                  {{user.name}}
+              </td>
+              
+      
+			
+               <td data-title="'Edicion'"  >
+				 <button type="submit" id="submit" style="margin-left:-20px;"  name="Eliminar" ng-model="user.id" ng-click="remove(user.id)" class="btn btn-danger pull-right">Eliminar</button>
+              </td>     
+                
+          </tr>
+        </table>
+		</form>   
+     
+      </div>
+			<div class="panel-footer"></div>
+				<br/>
+			<br/>
+			
+    </div>
+  </div>
+</div>
+</div><div class="col-md-1">
+</div>
+
+</div>
+

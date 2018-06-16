@@ -2,7 +2,9 @@
 	<head>
 			 <link rel="stylesheet" href="/css/bootstrap4.min.css" >
 			 <link rel="stylesheet" href="/css/custom.min.css" >
-		     <link href="/css/font-awesome.min.css" rel="stylesheet">
+			 <link href="/css/font-awesome.min.css" rel="stylesheet">
+			 		<script src="/js/jquery.min.js"></script>
+		<script src="/js/jquery-ui.min.js"></script>
     		 <script src="/js/angular1.6.4.min.js"></script>  
 			 <script src="/js/angular-animate.min.js"></script>
 			 <script src="/js/angular-aria.min.js"></script>
@@ -16,7 +18,9 @@
 			 <script src="/js/controllers/registerController.js"></script>
 			 <script src="/js/controllers/mainController.js"></script>
 			 <script src="/js/controllers/recoverPwdController.js"></script>
-
+ 	 <link href="/css/angular-bootstrap-toggle.min.css"
+                    rel="stylesheet">            
+    	 <script src="/js/angular-bootstrap-toggle.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">

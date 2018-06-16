@@ -28,12 +28,21 @@ public class SustentabilidadDaoImpl implements SustentabilidadDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+    
 	@Override
-	public Sustentabilidad getDataByUserId(Integer id) {
+	public Integer getId() {
 		// TODO Auto-generated method stub
-		Sustentabilidad pr =  (Sustentabilidad) jdbcTemplate.query("select * from RS_SUSTENTABILIDAD where idUser= ?  ",
-	                new Object[] { id }, new BeanPropertyRowMapper<Sustentabilidad>(Sustentabilidad.class));
+		Integer pr =  (Integer) jdbcTemplate.queryForObject("select case when max(id) > 0 then max(id)+1 else 1 end as valor from RS_SUSTENTABILIDAD ",
+	                new Object[] { }, Integer.class);
 
+	        return pr;	}
+	@Override
+	public List<Sustentabilidad> getDataByStatus(Integer userId,Integer status) {
+		// TODO Auto-generated method stub
+		List<Sustentabilidad>   pr =  jdbcTemplate.query("select * from RS_SUSTENTABILIDAD where idUser=? and status = ?  ",
+	                new Object[] { userId,status }, new BeanPropertyRowMapper<Sustentabilidad>(Sustentabilidad.class));
+			 
+			 
 	        return pr;	}
 
 	@Override
@@ -47,7 +56,7 @@ public class SustentabilidadDaoImpl implements SustentabilidadDao {
 	@Override
 	public void add(Sustentabilidad p) {
 		// TODO Auto-generated method stub
-		final String sql = "INSERT INTO RS_SUSTENTABILIDAD (id, idUser, createdAt,sourceId, benefactor, porcentajeAnual, comentario, status  "+")  VALUES ( ?,?, ?,?,?,?,?, ? )";
+		final String sql = "INSERT INTO RS_SUSTENTABILIDAD (id, idUser, createdAt,sourceId, benefactor, porcentajeAnual, comentario, status,sourceName  "+")  VALUES ( ?,?, ?,?,?,?,?, ? ,?)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
     	jdbcTemplate.update(
     	    new PreparedStatementCreator() {
@@ -62,12 +71,18 @@ public class SustentabilidadDaoImpl implements SustentabilidadDao {
      	            pst.setInt(6, p.getPorcentajeAnual());
     	            pst.setString(7, p.getComentario());
     	            pst.setInt(8, p.getStatus());
-    	      
+    	            pst.setString(9, p.getSourceName());
 
      	            return pst;
     	        }
     	    },
     	    keyHolder);
+	}
+	@Override
+	public void remove(Integer id) {
+		// TODO Auto-generated method stub
+		final String sql = "DELETE from RS_SUSTENTABILIDAD  WHERE id = ? ";
+		jdbcTemplate.update(sql,id);
 	}
 
 }

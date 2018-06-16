@@ -6,6 +6,7 @@ app.controller('loginController', function($scope,$window,$http,$rootScope,$base
 			allowed:false,
 			objectUser:""
 	}
+	$rootScope.idUser	=	"";
 	$scope.loginError	=	false;
 	$scope.login =	function(){
 		//$window.location.href = '#!register';
@@ -18,7 +19,10 @@ app.controller('loginController', function($scope,$window,$http,$rootScope,$base
 	    	if(response.data.allowed === true){
 	    		console.log("allow entrance to application")
 	    		$rootScope.user.allowed		=	true;
-	    		$rootScope.user.objectUser	=	response.data.user;
+				$rootScope.user.objectUser	=	response.data.user;
+				
+				 
+
 	    		var us = response.data.user.email;
 	    		var bs = response.data.user.pwd;
 	    		var dec = $base64.encode($scope.username+"_"+$scope.password)

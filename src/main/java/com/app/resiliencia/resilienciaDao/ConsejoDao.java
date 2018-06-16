@@ -13,5 +13,7 @@ public interface ConsejoDao {
 	public Consejo getDataByUserId(Integer userId);
 	public void update(Consejo Consejo);
 	public void add(Consejo Consejo);
+	public Integer getId();
+	public List<Consejo> getDataByStatus(Integer userId,Integer status);
 
 }

@@ -14,6 +14,8 @@ public class GeneralData {
 	private Integer clasificationId;
 	private Date fechaConstitucion;
 	private Date inicioOperacion;
+	private String fechaConstitucionText;
+	private String inicioOperacionText;
 	private Integer propertyTypeId;
 	private String comentarios;
 	private String calle;
@@ -29,6 +31,64 @@ public class GeneralData {
 	private String nombreDelContacto;
 	private Integer telefonoDeContacto;
 	private String emailDeContacto;
+	private String clasificationName;
+	private String stateName;
+	private String propertyName;
+	private Catalog propertyChoosen;
+	private Catalog clasificationChoosen;
+	private Catalog city;
+	
+	
+	
+	
+	public String getFechaConstitucionText() {
+		return fechaConstitucionText;
+	}
+	public void setFechaConstitucionText(String fechaConstitucionText) {
+		this.fechaConstitucionText = fechaConstitucionText;
+	}
+	public String getInicioOperacionText() {
+		return inicioOperacionText;
+	}
+	public void setInicioOperacionText(String inicioOperacionText) {
+		this.inicioOperacionText = inicioOperacionText;
+	}
+	public Catalog getCity() {
+		return city;
+	}
+	public void setCity(Catalog city) {
+		this.city = city;
+	}
+	public Catalog getClasificationChoosen() {
+		return clasificationChoosen;
+	}
+	public void setClasificationChoosen(Catalog clasificationChoosen) {
+		this.clasificationChoosen = clasificationChoosen;
+	}
+	public Catalog getPropertyChoosen() {
+		return propertyChoosen;
+	}
+	public void setPropertyChoosen(Catalog propertyChoosen) {
+		this.propertyChoosen = propertyChoosen;
+	}
+	public String getPropertyName() {
+		return propertyName;
+	}
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+	public String getStateName() {
+		return stateName;
+	}
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
+	}
+	public String getClasificationName() {
+		return clasificationName;
+	}
+	public void setClasificationName(String clasificationName) {
+		this.clasificationName = clasificationName;
+	}
 	public Integer getId() {
 		return id;
 	}

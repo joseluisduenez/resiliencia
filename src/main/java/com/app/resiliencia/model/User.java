@@ -25,8 +25,16 @@ public class User  implements Serializable {
 	 private String documentName;
 	 private String comments;
 	 private Integer telefono;
+	 private Boolean choosed = false;
 	 
-     public Integer getTelefono() {
+	 
+     public Boolean getChoosed() {
+		return choosed;
+	}
+	public void setChoosed(Boolean choosed) {
+		this.choosed = choosed;
+	}
+	public Integer getTelefono() {
 		return telefono;
 	}
 	public void setTelefono(Integer telefono) {

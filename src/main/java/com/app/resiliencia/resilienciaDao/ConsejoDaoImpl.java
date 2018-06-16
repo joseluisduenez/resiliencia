@@ -31,6 +31,21 @@ public class ConsejoDaoImpl implements ConsejoDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
 	@Override
+	public List<Consejo> getDataByStatus(Integer userId,Integer status) {
+		// TODO Auto-generated method stub
+		List<Consejo>   pr =  jdbcTemplate.query("select * from RS_CONSEJO where idUser=? and activo = ?  ",
+	                new Object[] { userId,status }, new BeanPropertyRowMapper<Consejo>(Consejo.class));
+			 
+			 
+	        return pr;	}
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		Integer pr =  (Integer) jdbcTemplate.queryForObject("select case when max(id) > 0 then max(id)+1 else 1 end as valor from RS_CONSEJO ",
+	                new Object[] { }, Integer.class);
+
+	        return pr;	}
+	@Override
 	public Consejo getDataByUserId(Integer id) {
 		// TODO Auto-generated method stub
 		Consejo pr =  (Consejo) jdbcTemplate.query("select * from RS_CONSEJO where idUser= ?  ",
@@ -49,7 +64,7 @@ public class ConsejoDaoImpl implements ConsejoDao {
 	@Override
 	public void add(Consejo p) {
 		// TODO Auto-generated method stub
-		final String sql = "INSERT INTO RS_CONSEJO (id, idUser, createdAt, activo, positionId, nombre, remove, fechaInicio, fechaFinal, apellido, fechaDeNacimiento, rfc  "+")  VALUES ( ?,?, ?,?,?,?,?, ?,?,?,?,? )";
+		final String sql = "INSERT INTO RS_CONSEJO (id, idUser, createdAt, activo, positionId, nombre, fechaInicio, fechaFinal, apellido, positionName  "+")  VALUES ( ?,?,?,?,?, ?,?,?,?,? )";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
     	jdbcTemplate.update(
     	    new PreparedStatementCreator() {
@@ -59,15 +74,16 @@ public class ConsejoDaoImpl implements ConsejoDao {
      	            pst.setInt(1, p.getId());
      	            pst.setInt(2, p.getIdUser());
      	            pst.setTimestamp(3, new java.sql.Timestamp(new Date().getTime()));
-     	            pst.setInt(4,p.getActivo());
-     	            pst.setInt(5, p.getPositionId());
+     	            pst.setInt(4,1);
+     	            pst.setInt(5, 0);
      	            pst.setString(6, p.getNombre());
-    	            pst.setInt(7, p.getRemove());
-     	            pst.setTimestamp(8, new java.sql.Timestamp(p.getFechaInicio().getTime()));
-     	            pst.setTimestamp(9, new java.sql.Timestamp(p.getFechaFinal().getTime()));
-    	            pst.setString(10, p.getApellido());
-     	            pst.setTimestamp(11, new java.sql.Timestamp(p.getFechaDeNacimiento().getTime()));
-    	            pst.setString(12, p.getRfc());
+    	           // pst.setInt(7, p.getRemove());
+     	            pst.setTimestamp(7, new java.sql.Timestamp(p.getFechaInicio().getTime()));
+     	            pst.setTimestamp(8, new java.sql.Timestamp(p.getFechaFinal().getTime()));
+    	            pst.setString(9, p.getApellido());
+     	            //pst.setTimestamp(11, new java.sql.Timestamp(p.getFechaDeNacimiento().getTime()));
+    	            //pst.setString(12, p.getRfc());
+    	            pst.setString(10, p.getPositionName());
 
 
      	            return pst;

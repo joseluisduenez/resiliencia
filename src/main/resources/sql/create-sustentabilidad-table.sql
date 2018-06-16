@@ -2,12 +2,13 @@
  CREATE TABLE RS_SUSTENTABILIDAD (
     id int NOT NULL PRIMARY KEY,
     idUser	int,
- 	createdAt timestamp
+ 	createdAt timestamp,
 	sourceId int,
 	benefactor TEXT,
 	porcentajeAnual int,
 	comentario	TEXT,
-	status int
+	status int,
+	 sourceName TEXT
 );
 
 

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.resiliencia.model.Catalog;
+import com.app.resiliencia.model.GeneralData;
 import com.app.resiliencia.model.User;
 @Transactional
 @Repository
@@ -26,6 +27,21 @@ public class PropertyDaoImpl implements PropertyDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+    @Override
+	public Catalog getDataById(Integer id) {
+		// TODO Auto-generated method stub
+    	Catalog pr = null;
+		try {
+			pr =	(Catalog) jdbcTemplate.queryForObject("select * from RS_PROPERTY_TYPE_CATALOG where id= ?  ",
+	                new Object[] { id }, new BeanPropertyRowMapper<Catalog>(Catalog.class));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+
+	        return pr;	
+	        }
 	@Override
 	public List<Catalog> getProperties() {
 		// TODO Auto-generated method stub

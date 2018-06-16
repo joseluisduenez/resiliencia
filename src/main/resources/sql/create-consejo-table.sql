@@ -2,7 +2,7 @@
  CREATE TABLE RS_CONSEJO (
     id int NOT NULL PRIMARY KEY,
     idUser	int,
- 	createdAt timestamp
+ 	createdAt timestamp,
  	activo		int,
  	positionId int,
  	nombre	TEXT,
@@ -11,7 +11,8 @@
  	fechaFinal timestamp,
  	apellido	TEXT,
  	fechaDeNacimiento timestamp,
- 	rfc		TEXT
+ 	rfc		TEXT,
+ 	positionName TEXT
 );
 
 

@@ -63,4 +63,19 @@ public class CityDaoImpl implements CityDao {
     	    keyHolder);
 	}
 
+	@Override
+	public Catalog getDataById(Integer id) {
+		// TODO Auto-generated method stub
+		Catalog pr = null;
+		try {
+			pr =	(Catalog) jdbcTemplate.queryForObject("select * from RS_CITY_CATALOG where id= ?  ",
+	                new Object[] { id }, new BeanPropertyRowMapper<Catalog>(Catalog.class));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+
+	        return pr;		}
+
 }

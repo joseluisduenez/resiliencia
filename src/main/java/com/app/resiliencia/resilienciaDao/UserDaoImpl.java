@@ -137,4 +137,13 @@ public class UserDaoImpl implements UserDao {
 		return id;
 	}
 
+	@Override
+	public List<User> getUsersRoleUser() {
+		// TODO Auto-generated method stub
+	    List<User> Users =  jdbcTemplate.query("select * from RS_USER where id >1 and role = 1 order by createdAt desc ",
+                new Object[] {  }, new BeanPropertyRowMapper<User>(User.class));
+
+        return Users;
+	}
+
 }

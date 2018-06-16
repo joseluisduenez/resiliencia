@@ -30,11 +30,24 @@ public class WhoAreWeDaoImpl implements WhoAreWeDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
 	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		Integer pr =  (Integer) jdbcTemplate.queryForObject("select case when max(id) > 0 then max(id)+1 else 1 end as valor from RS_WHO_ARE_WE ",
+	                new Object[] { }, Integer.class);
+
+	        return pr;	}
+	@Override
 	public WhoAreWe getDataByUserId(Integer id) {
 		// TODO Auto-generated method stub
-		WhoAreWe pr =  (WhoAreWe) jdbcTemplate.query("select * from RS_WHO_ARE_WE where idUser= ?  ",
+		WhoAreWe pr =  null;
+		try {		
+				pr = (WhoAreWe) jdbcTemplate.queryForObject("select * from RS_WHO_ARE_WE where idUser= ?  ",
 	                new Object[] { id }, new BeanPropertyRowMapper<WhoAreWe>(WhoAreWe.class));
-
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			
+		}
 	        return pr;	}
 
 	@Override

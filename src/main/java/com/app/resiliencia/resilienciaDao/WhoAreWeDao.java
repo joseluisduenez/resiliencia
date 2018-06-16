@@ -12,5 +12,6 @@ public interface WhoAreWeDao {
 	public WhoAreWe getDataByUserId(Integer userId);
 	public void update(WhoAreWe WhoAreWe);
 	public void add(WhoAreWe WhoAreWe);
+	public Integer getId() ;
 
 }

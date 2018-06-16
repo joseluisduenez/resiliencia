@@ -9,6 +9,6 @@ public interface GeneralDataDao {
 
 	public GeneralData getDataByUserId(Integer userId);
 	public void update(GeneralData generalData);
-	public void add(GeneralData generalData);
-
+	public  void add(GeneralData generalData);
+	public Integer getId();
 }

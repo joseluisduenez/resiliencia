@@ -19,6 +19,15 @@ app.config(function($routeProvider) {
     .when("/admin", {
         templateUrl : "html/admin.htm",
         controller  : 'adminController'
+    }) .when("/sustentabilidad", {
+        templateUrl : "html/sustentabilidad.htm",
+        controller  : 'sustentabilidadController'
+    }).when("/consejo", {
+        templateUrl : "html/consejo.htm",
+        controller  : 'consejoController'
+    }).when("/catalogoadmin", {
+        templateUrl : "html/catalogoadmin.htm",
+        controller  : 'catalogoadminController'
     });
 });
 
