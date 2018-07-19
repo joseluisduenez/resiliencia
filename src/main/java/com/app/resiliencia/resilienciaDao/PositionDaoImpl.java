@@ -63,4 +63,13 @@ public class PositionDaoImpl implements PositionDao {
     	    keyHolder);
 	}
 
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+				Integer pr =  (Integer) jdbcTemplate.queryForObject("select case when max(id) > 0 then max(id)+1 else 1 end as valor from RS_POSITION_CATALOG ",
+			                new Object[] { }, Integer.class);
+
+			        return pr;	
+	}
+
 }

@@ -8,6 +8,14 @@ public class Catalog {
 	private String name;
 	private Integer status;
 	private Date createdAt;
+	private Integer areaId;
+	
+	public Integer getAreaId() {
+		return areaId;
+	}
+	public void setAreaId(Integer areaId) {
+		this.areaId = areaId;
+	}
 	public Integer getId() {
 		return id;
 	}

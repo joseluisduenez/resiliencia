@@ -67,6 +67,15 @@ public class CatalogsController{
 	IncomeSourceDao IncomeSourceDao;
 	@Autowired
 	PositionDao PositionDao;
+	
+	@Autowired
+	DocumentCatalogDao DocumentCatalogDao;
+	@Autowired
+	AreaDao	AreaDao;
+	
+	@Autowired
+	SubAreaDao SubAreaDao;
+	
 	@Autowired
 	ConsejoDao ConsejoDao;
 	@RequestMapping(value = "/getGeneralData", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -188,9 +197,28 @@ public class CatalogsController{
 		
 	return catalogs;
 	}
+	@RequestMapping(value = "/getArea", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Catalog> getArea(
+ 			
+
+			HttpSession session
+			,HttpServletRequest request
+	) throws JsonProcessingException {
+		List<Catalog> catalogs  = null;
+	try {
+		catalogs = 	AreaDao.getRows();
+	      
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+       
+		
+	return catalogs;
+	}
 	@RequestMapping(value = "/getCatalog", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Catalog> getCatalog(
  			@RequestParam("catalog") final Integer catalog,
+ 			@RequestParam(value = "areaId", required=false) final Integer areaId,
 
 
 			HttpSession session
@@ -202,7 +230,18 @@ public class CatalogsController{
 			catalogs = 	ClasificationDao.getRows();
 		else if(catalog.equals(2))
 			catalogs = 	PropertyDao.getProperties();
-
+		else if(catalog.equals(3))
+			catalogs =  PositionDao.getRows();
+		else if(catalog.equals(5))
+			catalogs =  DocumentCatalogDao.getRows();
+		else if(catalog.equals(6))
+			catalogs =  IncomeSourceDao.getRows();
+		else if(catalog.equals(8))
+			catalogs =  AreaDao.getRows();
+		else if(catalog.equals(9))  
+ 			catalogs =  SubAreaDao.getRows(areaId);
+ 
+		
 	}catch(Exception e) {
 		e.printStackTrace();
 	}
@@ -214,12 +253,13 @@ public class CatalogsController{
 	public Integer addCatalog(
  			@RequestParam("catalog") final Integer catalogid,
  			@RequestParam("name") final String name,
+ 			@RequestParam(value = "areaId", required=false) final String areaId,
 
 
 			HttpSession session
 			,HttpServletRequest request
 	) throws JsonProcessingException {
-		logger.info("catalog: "+catalogid+" name: "+name);
+		logger.info("catalog: "+catalogid+" name: "+name+" AreaId: "+areaId);
 	try {
 		Catalog catalog = new Catalog();
 		catalog.setName(name);
@@ -228,6 +268,32 @@ public class CatalogsController{
 			catalog.setId(ClasificationDao.getId());
 			ClasificationDao.addRow(catalog);
 		}
+		else if(catalogid.equals(2)) {
+			catalog.setId(PropertyDao.getId());
+			  	PropertyDao.addProperty(catalog);
+			}
+		else if(catalogid.equals(3)) {
+			catalog.setId(PositionDao.getId());
+ 			  PositionDao.addRow(catalog);
+			}
+		else if(catalogid.equals(5)) {
+			catalog.setId(DocumentCatalogDao.getId());
+ 			  DocumentCatalogDao.addRow(catalog);
+			}
+		else if(catalogid.equals(6)) {
+			catalog.setId(IncomeSourceDao.getId());
+ 			  IncomeSourceDao.addRow(catalog);
+			}
+		else if(catalogid.equals(8)) {
+			logger.info("Area Dao if");
+			catalog.setId(AreaDao.getId());
+ 			  AreaDao.addRow(catalog);
+			}
+		else if(catalogid.equals(9)) {
+			catalog.setId(SubAreaDao.getId());
+			catalog.setAreaId(Integer.decode(areaId));
+ 			 SubAreaDao.addRow(catalog);
+			}
 	      
 	}catch(Exception e) {
 		e.printStackTrace();

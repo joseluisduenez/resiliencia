@@ -35,13 +35,23 @@
 					  <option value="1">Catalogo Clasificacion</option>
 					  <option value="2">Catalogo Tipo Propiedad</option>
 					  <option value="3">Catalogo Puestos en el consejo</option>
-					  <option value="4" selected>Catalogo</option>
+
 					  					  <option value="5" selected>Catalogo Documentos de Institucion</option>
 					  					  <option value="6" selected>Catalogo Fuentes de Ingreso</option>
-					  					  <option value="7" selected>Catalogo Estatus Proyecto</option>
+<!-- 					  					  <option value="7" selected>Catalogo Estatus Proyecto</option> -->
+					  					  <option value="8" selected>Catalogo Area</option>
+					  					  <option value="9" selected>Catalogo Sub-Area</option>
 					  				
 					  
 					</select>
+		    </div>
+		  </div>
+		   <div ng-if="subareachoosed" class="form-group">
+		    <label class="control-label col-sm-2"  >Elegir Area:</label>
+		    <div class="col-sm-10"> 
+
+					<select ng-change="loadcatalogSubArea()" ng-options="x as x.name for x in areas track by x.id " ng-model="generalData.clasificationChoosen" class="form-control"></select>
+
 		    </div>
 		  </div>
 			<div class="form-group">

@@ -6,11 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Util {
-	public static void main(String k[]) {
-		Date date =convertStringtoDate("2018-05-05");
-		System.out.println("2018-05-26T05:00:00.000Z".substring(0, 10));
-		System.out.println("DIa: "+convertDateToString(date));
-	}
+//	public static void main(String k[]) {
+//		Date date =convertStringtoDate("2018-05-05");
+//		System.out.println("2018-05-26T05:00:00.000Z".substring(0, 10));
+//		System.out.println("DIa: "+convertDateToString(date));
+//	}
 	public static String convertDateToString(Date dia) {
 		DateFormat df = new SimpleDateFormat("YYYY-MM-DD");
 

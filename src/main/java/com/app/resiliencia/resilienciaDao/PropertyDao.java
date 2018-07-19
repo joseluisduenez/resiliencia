@@ -6,6 +6,7 @@ import com.app.resiliencia.model.Catalog;
 
 public interface PropertyDao {
 	public Catalog getDataById(Integer id);
+	public Integer getId() ;
 
 	public List<Catalog> getProperties();
 	public void removeProperty(Integer id);

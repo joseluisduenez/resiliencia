@@ -21,15 +21,22 @@ import com.app.resiliencia.model.Catalog;
 import com.app.resiliencia.model.User;
 @Transactional
 @Repository
-public class DocumentCatalogDaoImpl implements DocumentCatalogDao {
+public class AreaDaoImpl implements AreaDao {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		Integer pr =  (Integer) jdbcTemplate.queryForObject("select case when max(id) > 0 then max(id)+1 else 1 end as valor from RS_AREA_CATALOG ",
+	                new Object[] { }, Integer.class);
+
+	        return pr;	}
+	@Override
 	public List<Catalog> getRows() {
 		// TODO Auto-generated method stub
-		  List<Catalog> pr =  jdbcTemplate.query("select * from RS_DOCUMENT_CATALOG order by createdAt desc ",
+		  List<Catalog> pr =  jdbcTemplate.query("select * from RS_AREA_CATALOG where status =1 ",
 	                new Object[] {  }, new BeanPropertyRowMapper<Catalog>(Catalog.class));
 
 	        return pr;	}
@@ -37,7 +44,7 @@ public class DocumentCatalogDaoImpl implements DocumentCatalogDao {
 	@Override
 	public void removeRow(Integer id) {
 		// TODO Auto-generated method stub
-		final String sql = "UPDATE RS_DOCUMENT_CATALOG SET status = ?  WHERE id = ? ";
+		final String sql = "UPDATE RS_AREA_CATALOG SET status = ?  WHERE id = ? ";
 		jdbcTemplate.update(sql,
 				0,id);
 	}
@@ -45,7 +52,7 @@ public class DocumentCatalogDaoImpl implements DocumentCatalogDao {
 	@Override
 	public void addRow(Catalog p) {
 		// TODO Auto-generated method stub
-		final String sql = "INSERT INTO RS_DOCUMENT_CATALOG (id, name, status, createdAt "+")  VALUES ( ?,?,?, ?)";
+		final String sql = "INSERT INTO RS_AREA_CATALOG (id, name, status, createdAt "+")  VALUES ( ?,?,?, ?)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
     	jdbcTemplate.update(
     	    new PreparedStatementCreator() {
@@ -64,12 +71,19 @@ public class DocumentCatalogDaoImpl implements DocumentCatalogDao {
 	}
 
 	@Override
-	public Integer getId() {
+	public Catalog getDataById(Integer id) {
 		// TODO Auto-generated method stub
-				Integer pr =  (Integer) jdbcTemplate.queryForObject("select case when max(id) > 0 then max(id)+1 else 1 end as valor from RS_DOCUMENT_CATALOG ",
-			                new Object[] { }, Integer.class);
+		Catalog pr = null;
+		try {
+			pr =	(Catalog) jdbcTemplate.queryForObject("select * from RS_AREA_CATALOG where id= ?  ",
+	                new Object[] { id }, new BeanPropertyRowMapper<Catalog>(Catalog.class));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 
-			        return pr;	
+	        return pr;	
 	}
 
 }
