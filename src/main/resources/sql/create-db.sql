@@ -1,13 +1,10 @@
 
- CREATE TABLE RS_USER (
-    id int NOT NULL PRIMARY KEY,
-    createdAt timestamp,
-    name 		TEXT,
+ CREATE TABLE RS_USER ( id int NOT NULL PRIMARY KEY,createdAt timestamp,name 		TEXT,
     email		TEXT,
  	password	TEXT,
  	comments	TEXT,
 
- 	telefono 	int,
+ 	telefono 	TEXT,
  	role 	int,
  	status int
  	

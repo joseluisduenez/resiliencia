@@ -41,6 +41,9 @@
 <!-- 					  					  <option value="7" selected>Catalogo Estatus Proyecto</option> -->
 					  					  <option value="8" selected>Catalogo Area</option>
 					  					  <option value="9" selected>Catalogo Sub-Area</option>
+			  					  		  <option value="10" selected>Catalogo Pregunta</option>
+  			  					  		  <option value="11" selected>Catalogo Respuesta</option>
+			  					  		  
 					  				
 					  
 					</select>
@@ -50,18 +53,90 @@
 		    <label class="control-label col-sm-2"  >Elegir Area:</label>
 		    <div class="col-sm-10"> 
 
-					<select ng-change="loadcatalogSubArea()" ng-options="x as x.name for x in areas track by x.id " ng-model="generalData.clasificationChoosen" class="form-control"></select>
+					<select ng-change="loadcatalogSubArea()" ng-options="x as x.name for x in areas track by x.id " ng-model="generalData.areachoosed" class="form-control"></select>
 
 		    </div>
 		  </div>
-			<div class="form-group">
+		  <div ng-if="questionchoosed" class="form-group">
+		    <label class="control-label col-sm-2"  >Elegir Area:</label>
+		    <div class="col-sm-10"> 
+
+					<select ng-change="loadcatalogSubArea()" ng-options="x as x.name for x in areas track by x.id " ng-model="generalData.areachoosed" class="form-control"></select>
+
+		    </div>
+		   
+
+		  </div>
+		    <div ng-if="questionchoosed" class="form-group">
+		 
+		   
+
+		      <label class="control-label col-sm-2"  >Elegir Sub-Area:</label>
+		    <div class="col-sm-10"> 
+
+					<select ng-change="loadcatalogQuestion()" ng-options="x as x.name for x in subareas track by x.id " ng-model="generalData.subareachoosed" class="form-control"></select>
+
+		    </div>
+		  </div>
+		  <!-- Response choosen -->
+		    <div ng-if="responsechoosed" class="form-group">
+		    <label class="control-label col-sm-2"  >Elegir Area:</label>
+		    <div class="col-sm-10"> 
+
+					<select ng-change="loadcatalogSubArea()" ng-options="x as x.name for x in areas track by x.id " ng-model="generalData.areachoosed" class="form-control"></select>
+
+		    </div>
+		   
+
+		  </div>
+		    <div ng-if="responsechoosed" class="form-group">
+		 
+		   
+
+		      <label class="control-label col-sm-2"  >Elegir Sub-Area:</label>
+		    <div class="col-sm-10"> 
+
+					<select ng-change="loadcatalogQuestion()" ng-options="x as x.name for x in subareas track by x.id " ng-model="generalData.subareachoosed" class="form-control"></select>
+
+		    </div>
+		  </div>
+		  <div ng-if="responsechoosed" class="form-group">
+		 
+		   
+
+		      <label class="control-label col-sm-2"  >Elegir Pregunta:</label>
+		    <div class="col-sm-10"> 
+
+					<select ng-change="loadcatalogResponse()" ng-options="x as x.name for x in preguntas track by x.id " ng-model="generalData.preguntachoosed" class="form-control"></select>
+
+		    </div>
+		  </div>
+			<div ng-if="responsechoosed == false" class="form-group">
 		    <label class="control-label col-sm-2"  >Nombre registro:</label>
 		    <div class="col-sm-10"> 
-		      <input type="text" ng-model="namecatalog" class="form-control" id="pwd" placeholder="">
+		      <input type="text" ng-model="namecatalog" class="form-control" id="namecatalog" value=" " placeholder="">
 		    </div>
 			</div>
-		 
-			  
+ 	    	<div ng-if="responsechoosed" class="form-group">
+			    <label class="control-label col-sm-2"  >Primera Respuesta:</label>
+			    <div class="col-sm-10"> 
+			      <input type="text" ng-model="ppregunta" class="form-control" value=" " id="ppregunta" placeholder="">
+			    </div>
+			</div>
+  	    	<div ng-if="responsechoosed" class="form-group">
+			    <label class="control-label col-sm-2"  >Segunda Respuesta:</label>
+			    <div class="col-sm-10"> 
+			      <input type="text" ng-model="spregunta" class="form-control" value=" " id="spregunta" placeholder="">
+			    </div>
+			</div>
+		  
+ 	    	<div ng-if="responsechoosed" class="form-group">
+			    <label class="control-label col-sm-2"  >Tercera Respuesta:</label>
+			    <div class="col-sm-10"> 
+			      <input type="text" ng-model="tpregunta" class="form-control" value=" " id="tpregunta" placeholder="">
+			    </div>
+			</div>
+ 			  
 		</form>   
      
       </div>

@@ -9,7 +9,30 @@ public class Catalog {
 	private Integer status;
 	private Date createdAt;
 	private Integer areaId;
+	private Integer subareaId;
+	private Integer questionid;
+	private Integer number;
 	
+	
+	
+	public Integer getNumber() {
+		return number;
+	}
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+	public Integer getQuestionid() {
+		return questionid;
+	}
+	public void setQuestionid(Integer questionid) {
+		this.questionid = questionid;
+	}
+	public Integer getSubareaId() {
+		return subareaId;
+	}
+	public void setSubareaId(Integer subareaId) {
+		this.subareaId = subareaId;
+	}
 	public Integer getAreaId() {
 		return areaId;
 	}

@@ -3,11 +3,6 @@ package com.app.resiliencia.model;
 import java.io.Serializable;
 import java.util.Date;
 
- 
-
- 
- 
-
 public class User  implements Serializable {
 
 
@@ -24,7 +19,7 @@ public class User  implements Serializable {
 	 private String fileName;
 	 private String documentName;
 	 private String comments;
-	 private Integer telefono;
+	 private String telefono;
 	 private Boolean choosed = false;
 	 
 	 
@@ -34,10 +29,10 @@ public class User  implements Serializable {
 	public void setChoosed(Boolean choosed) {
 		this.choosed = choosed;
 	}
-	public Integer getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(Integer telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 	public String getFileName() {

@@ -1,0 +1,47 @@
+ <!-- Content Header (Page header) -->
+ 
+    <section class="content-header">
+      <h1>
+              <div id="titulo">Encuesta</div>
+      </h1>
+      <h5>
+              <div id="titulo">Complete la siguiente encuesta seleccionando una opcion de cada pregunta.</div>
+      </h5>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Encuesta</li>
+      </ol>
+  </section>
+    <!-- /.content -->
+<br/>
+<br/>
+
+<div "margin-left:10px;" ng-repeat="area in encuesta.area "class="row">
+	<div class="col-md-12">
+		Area: {{area.name}} 
+		<div style="margin-left:30px;" ng-repeat="subarea in area.subarea "class="row">
+			<div class="col-md-12">
+				 {{subarea.name}} 
+				<div style="margin-left:10px;" ng-repeat="pregunta in subarea.pregunta "class="row">
+					<div class="col-md-12">
+						{{pregunta.name}}? 
+						<form action="">
+							<div style="margin-left:10px;" ng-repeat="respuesta in pregunta.respuesta "class="row">
+								
+									  <input type="radio" id="{{respuesta.id}}" name="gender" value="{{respuesta.number}}" > {{respuesta.name}}<br>
+								
+								
+								
+							</div></form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		 <button type="submit" id="submit"  name="submit" ng-click="save()" class="btn btn-primary pull-right">Guardar</button>
+	</div>
+</div>
+

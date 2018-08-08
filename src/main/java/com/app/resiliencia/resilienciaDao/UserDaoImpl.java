@@ -75,7 +75,7 @@ public class UserDaoImpl implements UserDao {
      	            pst.setString(5, user.getPassword()==null?"":user.getPassword());
      	            pst.setString(6, user.getComments()==null?"":user.getComments());
 
-     	            pst.setInt(7, user.getTelefono()==null?0:user.getTelefono());
+     	            pst.setString(7, user.getTelefono()==null?"":user.getTelefono());
 
      	            pst.setInt(8, user.getRole()==null?0:user.getRole());
      	            pst.setInt(9, user.getStatus());

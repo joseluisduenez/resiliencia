@@ -28,6 +28,9 @@ app.config(function($routeProvider) {
     }).when("/catalogoadmin", {
         templateUrl : "html/catalogoadmin.htm",
         controller  : 'catalogoadminController'
+    }).when("/encuesta", {
+        templateUrl : "html/encuesta.htm",
+        controller  : 'encuestaController'
     });
 });
 

@@ -1,9 +1,11 @@
 
- CREATE TABLE RS_AREA_CATALOG (
+ CREATE TABLE RS_QUESTION (
     id int NOT NULL PRIMARY KEY,
     name TEXT,
  	status int,
- 	createdAt timestamp
+ 	createdAt timestamp,
+ 	areaId int,
+ 	subareaId int
  	
 );
 

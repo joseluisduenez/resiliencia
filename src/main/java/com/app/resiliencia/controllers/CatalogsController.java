@@ -75,9 +75,24 @@ public class CatalogsController{
 	
 	@Autowired
 	SubAreaDao SubAreaDao;
-	
+	@Autowired
+	QuestionDao QuestionDao;
 	@Autowired
 	ConsejoDao ConsejoDao;
+	@Autowired 
+	EncuestaDao EncuestaDao;
+	@Autowired
+	ResponseDao ResponseDao;
+	
+	@RequestMapping(value = "/getEncuesta", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Encuesta getEncuesta(
+			HttpSession session
+			,HttpServletRequest request
+	) throws JsonProcessingException {	 
+       
+		
+	return EncuestaDao.getRows();
+	}
 	@RequestMapping(value = "/getGeneralData", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public GeneralData generalData(
  			@RequestParam("userId") final Integer userId,
@@ -215,6 +230,57 @@ public class CatalogsController{
 		
 	return catalogs;
 	}
+	
+	@RequestMapping(value = "/getSubArea", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Catalog> getSubArea(
+ 			 HttpSession session
+			,HttpServletRequest request,
+			Integer areaId
+	) throws JsonProcessingException {
+		List<Catalog> catalogs  = null;
+	try {
+		catalogs = 	SubAreaDao.getRows(areaId);
+	      
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+       
+		
+	return catalogs;
+	}
+	@RequestMapping(value = "/getRespuestas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Catalog> getRespuestas(
+ 			@RequestParam(value = "preguntaId", required=false) final Integer preguntaId,
+
+
+			HttpSession session
+			,HttpServletRequest request
+	) throws JsonProcessingException {
+		List<Catalog> catalogs  = null;
+	try {
+ 			catalogs =  ResponseDao.getRows(preguntaId);
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	return catalogs;
+	}
+	@RequestMapping(value = "/getPreguntas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Catalog> getPreguntas(
+ 			@RequestParam(value = "areaId", required=false) final Integer areaId,
+ 			@RequestParam(value = "subareaId", required=false) final Integer subareaId,
+
+
+			HttpSession session
+			,HttpServletRequest request
+	) throws JsonProcessingException {
+		List<Catalog> catalogs  = null;
+	try {
+ 			catalogs =  QuestionDao.getRows(areaId,subareaId);
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	return catalogs;
+	}
 	@RequestMapping(value = "/getCatalog", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Catalog> getCatalog(
  			@RequestParam("catalog") final Integer catalog,
@@ -240,6 +306,11 @@ public class CatalogsController{
 			catalogs =  AreaDao.getRows();
 		else if(catalog.equals(9))  
  			catalogs =  SubAreaDao.getRows(areaId);
+		else if(catalog.equals(10))  
+ 			catalogs =  SubAreaDao.getRows(areaId);
+		else if(catalog.equals(11))  
+ 			catalogs =  SubAreaDao.getRows(areaId);
+		
  
 		
 	}catch(Exception e) {
@@ -254,12 +325,17 @@ public class CatalogsController{
  			@RequestParam("catalog") final Integer catalogid,
  			@RequestParam("name") final String name,
  			@RequestParam(value = "areaId", required=false) final String areaId,
+ 			@RequestParam(value = "subareaId", required=false) final String subAreaId,
+ 			@RequestParam(value = "preguntaId", required=false) final String preguntaId,
+ 			@RequestParam(value = "ppregunta", required=false) final String ppregunta,
+ 			@RequestParam(value = "spregunta", required=false) final String spregunta,
+ 			@RequestParam(value = "tpregunta", required=false) final String tpregunta,
 
 
 			HttpSession session
 			,HttpServletRequest request
 	) throws JsonProcessingException {
-		logger.info("catalog: "+catalogid+" name: "+name+" AreaId: "+areaId);
+		logger.info("catalog: "+catalogid+" name: "+name+" AreaId: "+areaId+ "SubAreaId: "+subAreaId+" preguntaId: "+preguntaId);
 	try {
 		Catalog catalog = new Catalog();
 		catalog.setName(name);
@@ -294,7 +370,29 @@ public class CatalogsController{
 			catalog.setAreaId(Integer.decode(areaId));
  			 SubAreaDao.addRow(catalog);
 			}
-	      
+		else if(catalogid.equals(10)) {
+			catalog.setId(QuestionDao.getId());
+			catalog.setAreaId(Integer.decode(areaId));
+			catalog.setSubareaId(Integer.decode(subAreaId));
+			QuestionDao.addRow(catalog);
+			}
+		else if(catalogid.equals(11)) {
+			catalog.setId(ResponseDao.getId());
+			catalog.setAreaId(Integer.decode(areaId));
+			catalog.setSubareaId(Integer.decode(subAreaId));
+			catalog.setQuestionid(Integer.decode(preguntaId));
+			catalog.setName(ppregunta);
+			catalog.setNumber(1);
+			ResponseDao.addRow(catalog);
+			catalog.setId(ResponseDao.getId());
+			catalog.setName(spregunta);
+			catalog.setNumber(2);
+			ResponseDao.addRow(catalog);
+			catalog.setId(ResponseDao.getId());
+			catalog.setName(tpregunta);
+			catalog.setNumber(3);
+			ResponseDao.addRow(catalog);
+			}
 	}catch(Exception e) {
 		e.printStackTrace();
 	}
@@ -592,7 +690,7 @@ public class CatalogsController{
 	public Integer register(
  			@RequestParam("username") final String username,
 			@RequestParam("mail") final String mailto,
-			@RequestParam("tel") final Integer tel,
+			@RequestParam("tel") final String tel,
 			@RequestParam("pwd") final String pwd,
 			@RequestParam("comment") final String comment
 
@@ -618,11 +716,5 @@ public class CatalogsController{
 		userDao.addUser(User);
 	return 200;
 	}
- 
- 
-
- 
-
-
 
 }

@@ -196,7 +196,7 @@ public class UserController{
 	public Integer register(
  			@RequestParam("username") final String username,
 			@RequestParam("mail") final String mailto,
-			@RequestParam("tel") final Integer tel,
+			@RequestParam("tel") final String tel,
 			@RequestParam("pwd") final String pwd,
 			@RequestParam("comment") final String comment
 

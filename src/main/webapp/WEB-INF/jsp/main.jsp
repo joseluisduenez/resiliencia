@@ -81,6 +81,7 @@
          <script src="/js/controllers/sustentabilidadController.js"></script>
          <script src="/js/controllers/consejoController.js"></script>
          <script src="/js/controllers/catalogoadminController.js"></script>
+         <script src="/js/controllers/encuestaController.js"></script>
 
     	 <link href="/css/angular-bootstrap-toggle.min.css"
                     rel="stylesheet">            
@@ -425,6 +426,7 @@
                    <li class="active"><a href="#!whoarewe" ><i class="fa fa-angle-right"></i>Quienes Somos</a></li>
                    <li class="active"><a href="#!sustentabilidad" ><i class="fa fa-angle-right"></i>Sustentabilidad</a></li>
                    <li class="active"><a href="#!consejo" ><i class="fa fa-angle-right"></i>Consejo</a></li>
+                   <li class="active"><a href="#!encuesta" ><i class="fa fa-angle-right"></i>Encuesta</a></li>
 
           </ul>
         </li>

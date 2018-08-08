@@ -18,6 +18,8 @@
 			 <script src="/js/controllers/registerController.js"></script>
 			 <script src="/js/controllers/mainController.js"></script>
 			 <script src="/js/controllers/recoverPwdController.js"></script>
+          	 <script src="/js/controllers/encuestaController.js"></script>
+			 
  	 <link href="/css/angular-bootstrap-toggle.min.css"
                     rel="stylesheet">            
     	 <script src="/js/angular-bootstrap-toggle.min.js"></script>
