@@ -88,4 +88,11 @@ public class ResponseDaoImpl implements ResponseDao {
 	        return pr;
 	}
 
+	@Override
+	public void update(Catalog p) {
+		final String sql = "UPDATE RS_RESPONSE SET name = ?  WHERE id = ? ";
+		jdbcTemplate.update(sql,
+				p.getName(),p.getId());			
+	}
+
 }

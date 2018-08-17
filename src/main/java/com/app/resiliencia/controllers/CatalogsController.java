@@ -320,6 +320,65 @@ public class CatalogsController{
 		
 	return catalogs;
 	}
+	@RequestMapping(value = "/updateCatalog", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Integer updateCatalog(
+ 			@RequestParam("catalog") final Integer catalogid,
+ 			@RequestParam("text") final String text,
+ 			@RequestParam("id") final Integer id,
+
+
+
+			HttpSession session
+			,HttpServletRequest request
+	) throws JsonProcessingException {
+		logger.info("catalog: "+catalogid+" text: "+text );
+	try {
+		Catalog catalog = new Catalog();
+		catalog.setName(text);
+		catalog.setStatus(1);
+		if(catalogid.equals(1)) {
+			catalog.setId(ClasificationDao.getId());
+			ClasificationDao.addRow(catalog);
+		}
+		else if(catalogid.equals(2)) {
+			catalog.setId(id);
+			  	PropertyDao.update(catalog);
+			}
+		else if(catalogid.equals(3)) {
+			catalog.setId(id);
+ 			  PositionDao.update(catalog);
+			}
+		else if(catalogid.equals(5)) {
+			catalog.setId(id);
+ 			  DocumentCatalogDao.update(catalog);
+			}
+		else if(catalogid.equals(6)) {
+			catalog.setId(id);
+ 			  IncomeSourceDao.update(catalog);
+			}
+		else if(catalogid.equals(8)) {
+			  catalog.setId(id);
+ 			  AreaDao.update(catalog);
+			}
+		else if(catalogid.equals(9)) {
+			catalog.setId(id);
+ 			 SubAreaDao.update(catalog);
+			}
+		else if(catalogid.equals(10)) {
+			catalog.setId(id);
+			QuestionDao.update(catalog);
+			}
+		else if(catalogid.equals(11)) {
+			catalog.setId(id);
+			ResponseDao.update(catalog);
+			}
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+       
+		
+	return 200;
+	}
 	@RequestMapping(value = "/addCatalog", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Integer addCatalog(
  			@RequestParam("catalog") final Integer catalogid,

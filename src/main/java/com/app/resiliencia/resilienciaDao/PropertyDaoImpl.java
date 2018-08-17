@@ -86,5 +86,15 @@ public class PropertyDaoImpl implements PropertyDao {
 
 	        return pr;	
 	}
+	 
+		// TODO Auto-generated method stub
+		@Override
+		public void update(Catalog p) {
+			// TODO Auto-generated method stub
+			final String sql = "UPDATE RS_PROPERTY_TYPE_CATALOG SET name = ?  WHERE id = ? ";
+			jdbcTemplate.update(sql,
+					p.getName(),p.getId());
+		 
+	}
 
 }

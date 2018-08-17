@@ -72,4 +72,11 @@ public class DocumentCatalogDaoImpl implements DocumentCatalogDao {
 			        return pr;	
 	}
 
+	@Override
+	public void update(Catalog p) {
+		final String sql = "UPDATE RS_DOCUMENT_CATALOG SET name = ?  WHERE id = ? ";
+		jdbcTemplate.update(sql,
+				p.getName(),p.getId());			
+	}
+
 }

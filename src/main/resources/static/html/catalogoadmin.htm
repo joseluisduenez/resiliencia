@@ -154,13 +154,29 @@
           <tr ng-repeat="user in datat">
               
               <td data-title="'Nombre'" sortable="'sourceName'" filter="{ 'name': 'text' }" >
-                  {{user.name}}
+                 
+                  <input type="text" name="edit" id="typeTextTable_{{user.id}}" value="{{user.name}}">
               </td>
               
       
 			
                <td data-title="'Edicion'"  >
-				 <button type="submit" id="submit" style="margin-left:-20px;"  name="Eliminar" ng-model="user.id" ng-click="remove(user.id)" class="btn btn-danger pull-right">Eliminar</button>
+               <div class = "row">
+               <div class="col-md-2"></div>
+               <div class="col-md-2"></div>
+               
+               	<div class ="col-md-4">
+               					 <button type="submit" id="submit" style="margin-left:-20px;"  name="Eliminar" ng-model="user.id" ng-click="remove(user.id)" class="btn btn-danger pull-right">Eliminar</button>
+               	
+               	</div>
+               	<div class ="col-md-4">
+               	             	 <button type="submit" id="submit" style="margin-left:-20px;"  name="Actualizar" ng-model="user.id" ng-click="update(user.id)" class="btn btn-success pull-right">Actualizar</button>
+               	
+               	</div>
+               	
+               </div>
+
+              
               </td>     
                 
           </tr>

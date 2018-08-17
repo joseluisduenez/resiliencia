@@ -85,5 +85,12 @@ public class ClasificationDaoImpl implements ClasificationDao {
 
 	        return pr;	
 	}
+	@Override
+	public void update(Catalog p) {
+		// TODO Auto-generated method stub
+		final String sql = "UPDATE RS_CLASIFICATION_CATALOG SET name = ?  WHERE id = ? ";
+		jdbcTemplate.update(sql,
+				p.getName(),p.getId());
+	}
 
 }

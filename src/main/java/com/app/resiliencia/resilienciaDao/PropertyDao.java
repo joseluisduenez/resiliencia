@@ -11,4 +11,6 @@ public interface PropertyDao {
 	public List<Catalog> getProperties();
 	public void removeProperty(Integer id);
 	public void addProperty(Catalog p);
+	public void update(Catalog p);
+
 }

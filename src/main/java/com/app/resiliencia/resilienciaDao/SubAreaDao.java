@@ -11,4 +11,6 @@ public interface SubAreaDao {
 	public void removeRow(Integer id);
 	public void addRow(Catalog p);
 	public Integer getId() ;
+	public void update(Catalog p);
+
 }

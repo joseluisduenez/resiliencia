@@ -215,6 +215,26 @@ app.controller('catalogoadminController' ,function($scope,ngTableParams,$filter,
 		}); 
 	}
 	
+	$scope.update = function(id){
+		var txt =	document.getElementById("typeTextTable_"+id);
+		var val = "";
+		if(txt!=null){
+			val = txt.value;
+			console.log("El valor texto es: "+val)
+			console.log("El catalogo choosed: "+$scope.catalogochoosed)
+		  $http.get("/catalogs/updateCatalog?catalog="+$scope.catalogochoosed+"&id="+id+"&text="+val)
+		    .then(function(response) {
+				$window.location.href = '#!catalogoadmin';
+	
+			}, function(response) {
+		        //Second function handles error
+		        $scope.content = "Something went wrong";
+		        console.log("Somenthing went wrong")
+			}); 
+		}
+		
+
+	}
  	 $scope.save =	function(id){
  		 var ppregunta = "null";
  		var spregunta = "null";
