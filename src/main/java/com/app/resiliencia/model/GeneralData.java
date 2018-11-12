@@ -19,17 +19,17 @@ public class GeneralData {
 	private Integer propertyTypeId;
 	private String comentarios;
 	private String calle;
-	private Integer numero;
+	private String numero;
 	private String colonia;
-	private Integer codigoPostal;
+	private String codigoPostal;
 	private Integer ciudadId;
 	private Integer estadoId;
 	private String pais;
-	private Integer telefonoOficina;
+	private String telefonoOficina;
 	private String www;
 	private String email;
 	private String nombreDelContacto;
-	private Integer telefonoDeContacto;
+	private String telefonoDeContacto;
 	private String emailDeContacto;
 	private String clasificationName;
 	private String stateName;
@@ -167,10 +167,10 @@ public class GeneralData {
 	public void setCalle(String calle) {
 		this.calle = calle;
 	}
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 	public String getColonia() {
@@ -179,10 +179,10 @@ public class GeneralData {
 	public void setColonia(String colonia) {
 		this.colonia = colonia;
 	}
-	public Integer getCodigoPostal() {
+	public String getCodigoPostal() {
 		return codigoPostal;
 	}
-	public void setCodigoPostal(Integer codigoPostal) {
+	public void setCodigoPostal(String codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
 	public Integer getCiudadId() {
@@ -203,10 +203,10 @@ public class GeneralData {
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
-	public Integer getTelefonoOficina() {
+	public String getTelefonoOficina() {
 		return telefonoOficina;
 	}
-	public void setTelefonoOficina(Integer telefonoOficina) {
+	public void setTelefonoOficina(String telefonoOficina) {
 		this.telefonoOficina = telefonoOficina;
 	}
 	public String getWww() {
@@ -227,10 +227,10 @@ public class GeneralData {
 	public void setNombreDelContacto(String nombreDelContacto) {
 		this.nombreDelContacto = nombreDelContacto;
 	}
-	public Integer getTelefonoDeContacto() {
+	public String getTelefonoDeContacto() {
 		return telefonoDeContacto;
 	}
-	public void setTelefonoDeContacto(Integer telefonoDeContacto) {
+	public void setTelefonoDeContacto(String telefonoDeContacto) {
 		this.telefonoDeContacto = telefonoDeContacto;
 	}
 	public String getEmailDeContacto() {

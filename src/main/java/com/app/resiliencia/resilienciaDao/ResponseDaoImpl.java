@@ -28,7 +28,7 @@ public class ResponseDaoImpl implements ResponseDao {
     JdbcTemplate jdbcTemplate;
 	@Override
 	public List<Catalog> getRows(Integer questionId) {
-		  List<Catalog> pr =  jdbcTemplate.query("select * from RS_RESPONSE where questionid = ?  order by number asc ",
+		  List<Catalog> pr =  jdbcTemplate.query("select * from RS_RESPONSE where questionid = ? and status = 1  order by number asc ",
 	                new Object[] {questionId}, new BeanPropertyRowMapper<Catalog>(Catalog.class));
 
 	        return pr;	}
@@ -36,9 +36,9 @@ public class ResponseDaoImpl implements ResponseDao {
 	@Override
 	public void removeRow(Integer id) {
 		// TODO Auto-generated method stub
-		final String sql = "UPDATE RS_RESPONSE SET status = ?  WHERE id = ? ";
+		final String sql = "delete from RS_RESPONSE where id = ? ";
 		jdbcTemplate.update(sql,
-				0,id);
+				id);
 	}
 
 	@Override

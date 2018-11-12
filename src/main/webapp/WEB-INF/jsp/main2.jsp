@@ -46,7 +46,7 @@
 		 <link href="/css/AdminLTE.min.css" rel="stylesheet" />
 		 <link href="/css/_all-skins.min.css" rel="stylesheet" />
 		 <link href="/css/jquery-jvectormap.css" rel="stylesheet" />
-		 <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+<!-- 		 <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet" /> -->
 		  <link rel="stylesheet" href="/css/daterangepicker.css">
 		  <link rel="stylesheet" href="/css/font.css">
 		  <link rel="stylesheet" href="/css/jquery.datatables.min.css">
@@ -427,7 +427,6 @@
                    <li class="active"><a href="#!sustentabilidad" ><i class="fa fa-angle-right"></i>Procuracion de Fondos</a></li>
                    <li class="active"><a href="#!consejo" ><i class="fa fa-angle-right"></i>Consejo</a></li>
                    <li class="active"><a href="#!encuesta" ><i class="fa fa-angle-right"></i>Encuesta</a></li>
-                   <li class="active"><a href="http://159.89.151.82:81" ><i class="fa fa-angle-right"></i>Universidad del Bien</a></li>
 
           </ul>
         </li>
@@ -459,7 +458,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b>0.9
     </div>
-    <strong>Copyright &copy; 2018-2019 <a href="https://adminlte.io"></a>.</strong> All rights
+    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io"></a>.</strong> All rights
     reserved.
   </footer>
 

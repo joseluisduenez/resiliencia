@@ -27,10 +27,10 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
 	@Override
-	public List<UserDocument> getUserDocs() {
+	public List<UserDocument> getUserDocs(Integer Userid) {
 		// TODO Auto-generated method stub
-	    List<UserDocument> docs =  jdbcTemplate.query("select * from RS_USER_DOC where status = 1 order by createdAt desc ",
-                new Object[] {  }, new BeanPropertyRowMapper<UserDocument>(UserDocument.class));
+	    List<UserDocument> docs =  jdbcTemplate.query("select * from RS_USER_DOC where status = 1 and userid = ? order by createdAt desc ",
+                new Object[] { Userid }, new BeanPropertyRowMapper<UserDocument>(UserDocument.class));
 
         return docs;
 	}
@@ -47,8 +47,8 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
 	public void addDocument(UserDocument doc) {
 		// TODO Auto-generated method stub
 		final String sql = "INSERT INTO RS_USER_DOC (id,userId, createdAt, fileName,docName, "
-        		+ "comments, status"
-        		+ ")  VALUES ( ?,?,?, ?, ?, ?, ?)";
+        		+ "comments, status, docType"
+        		+ ")  VALUES ( ?,?,?, ?, ?, ?, ?, ?)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
     	jdbcTemplate.update(
     	    new PreparedStatementCreator() {
@@ -62,6 +62,8 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
      	            pst.setString(5, doc.getDocName()==null?"":doc.getDocName());
      	            pst.setString(6, doc.getComments()==null?"":doc.getComments());
      	            pst.setInt(7, doc.getStatus()==null?0:doc.getStatus());
+     	            pst.setString(8, doc.getDocType()==null?"":doc.getDocType());
+
      	            return pst;
     	        }
     	    },
@@ -83,7 +85,9 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
 	@Override
 	public void deleteDoc(Integer id) {
 		// TODO Auto-generated method stub
-		
+		final String sql = "UPDATE RS_USER_DOC SET status = ?  WHERE id = ? ";
+		jdbcTemplate.update(sql,
+				0,id);
 	}
 
 	@Override

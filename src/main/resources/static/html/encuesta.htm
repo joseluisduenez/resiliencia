@@ -18,13 +18,24 @@
 
 <div "margin-left:10px;" ng-repeat="area in encuesta.area "class="row">
 	<div class="col-md-12">
-		Area: {{area.name}} 
-		<div style="margin-left:30px;" ng-repeat="subarea in area.subarea "class="row">
+		<h4 style="background-color:#1f1f2e;" class="header">
+		<p style="padding-left:30px;font-size:25px;color:#ffffff;">{{area.name}}</p>
+		 
+		</h4>
+		<div style="margin-top:-20px;" ng-repeat="subarea in area.subarea "class="row">
 			<div class="col-md-12">
-				 {{subarea.name}} 
+			<h5 style="background-color:#80aaff;" class="header">
+		<p style="padding-left:30px;font-size:25px;color:#ffffff;">{{subarea.name}} </p>
+		 
+		</h5>
+				  
 				<div style="margin-left:10px;" ng-repeat="pregunta in subarea.pregunta "class="row">
 					<div class="col-md-12">
-						{{pregunta.name}}? 
+						<h4 style="" class="header">
+							<p style=" font-weight: bold;padding-left:30px;font-size:20px;color:#696969;">{{pregunta.name}}?</p>
+						 
+						</h4>
+						 <br/>
 						<form action="">
 							<div style="margin-left:10px;" ng-repeat="respuesta in pregunta.respuesta "class="row">
 								

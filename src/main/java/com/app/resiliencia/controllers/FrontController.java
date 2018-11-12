@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,8 @@ import com.google.gson.Gson;
 @RequestMapping("/")
 public class FrontController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
+	@Value("${filePath}")
+	private String filePath;
    
     @RequestMapping("")
     public String init(Model model,HttpSession session) {
@@ -82,7 +84,8 @@ public class FrontController {
 	        user.setFileName(fileName);
             session.setAttribute("User", user);
 	    	 byte[] bytes = file.getBytes();
-	            Path path = Paths.get("/home/support/appImages/"+fileName);
+	            Path path = Paths.get(filePath+fileName);
+	            logger.info("SIZE BYTES: "+bytes.length);
 	            Files.write(path, bytes);
 	            model.addAttribute(Messages.FORM_SENT,true);
 	            Thread.sleep(3000L);

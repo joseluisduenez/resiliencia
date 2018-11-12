@@ -11,8 +11,17 @@ public class UserDocument {
 	private String comments;
 	private Date createdAt;
 	private Integer status;
+	private String docType;
 	
 	
+	
+	 
+	public String getDocType() {
+		return docType;
+	}
+	public void setDocType(String docType) {
+		this.docType = docType;
+	}
 	public Integer getStatus() {
 		return status;
 	}

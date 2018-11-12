@@ -33,6 +33,7 @@ public class GeneralDataDaoImpl implements GeneralDataDao {
 	@Override
 	public GeneralData getDataByUserId(Integer id) {
 		// TODO Auto-generated method stub
+		logger.info("idUser = "+id);
 		GeneralData pr = null;
 		try {
 			pr =	(GeneralData) jdbcTemplate.queryForObject("select * from RS_GENERAL_DATA where idUser= ?  ",
@@ -82,29 +83,29 @@ public class GeneralDataDaoImpl implements GeneralDataDao {
      	            pst.setTimestamp(2, new java.sql.Timestamp(new Date().getTime()));
      	            pst.setInt(3, p.getIdUser());
      	            pst.setString(4,p.getProyectoReciente());
-     	            pst.setString(5, p.getNombre());
-     	            pst.setString(6, p.getRazonSocial());
-    	            pst.setString(7, p.getRfc());
+     	            pst.setString(5, p.getNombre()==null?"":p.getNombre());
+     	            pst.setString(6, p.getRazonSocial()==null?"":p.getRazonSocial());
+    	            pst.setString(7, p.getRfc()==null?"":p.getRfc());
     	            pst.setInt(8, 0);
     	            pst.setTimestamp(9,  new java.sql.Timestamp((p.getFechaConstitucion()).getTime()));
     	            pst.setTimestamp(10, new java.sql.Timestamp((p.getInicioOperacion()).getTime()));
      	            pst.setInt(11, p.getPropertyTypeId());
-     	            pst.setString(12, p.getComentarios());
-     	            pst.setString(13, p.getCalle());
-     	            pst.setInt(14, p.getNumero());
-     	            pst.setString(15, p.getColonia());
-     	            pst.setInt(16, p.getCodigoPostal());
+     	            pst.setString(12, p.getComentarios()==null?"":p.getComentarios());
+     	            pst.setString(13, p.getCalle()==null?"":p.getCalle());
+     	            pst.setString(14, p.getNumero()==null?"":p.getNumero());
+     	            pst.setString(15, p.getColonia()==null?"":p.getColonia());
+     	            pst.setString(16, p.getCodigoPostal()==null?"":p.getCodigoPostal());
      	            pst.setInt(17, p.getCiudadId());
      	            pst.setInt(18, 0);
-     	            pst.setString(19, p.getPais());
-     	            pst.setInt(20, p.getTelefonoOficina());
-     	            pst.setString(21, p.getWww());
-     	            pst.setString(22, p.getEmail());
-     	            pst.setString(23, p.getNombreDelContacto());
-     	            pst.setInt(24, p.getTelefonoDeContacto());
-     	            pst.setString(25, p.getEmail());
-     	            pst.setString(26, p.getClasificationName());
-     	            pst.setString(27, p.getPropertyName());
+     	            pst.setString(19, p.getPais()==null?"":p.getPais());
+     	            pst.setString(20, p.getTelefonoOficina()==null?"":p.getTelefonoOficina());
+     	            pst.setString(21, p.getWww()==null?"":p.getWww());
+     	            pst.setString(22, p.getEmail()==null?"":p.getEmail());
+     	            pst.setString(23, p.getNombreDelContacto()==null?"":p.getNombreDelContacto());
+     	            pst.setString(24, p.getTelefonoDeContacto()==null?"":p.getTelefonoDeContacto());
+     	            pst.setString(25, p.getEmail()==null?"":p.getEmail());
+     	            pst.setString(26, p.getClasificationName()==null?"":p.getClasificationName());
+     	            pst.setString(27, p.getPropertyName()==null?"":p.getPropertyName());
 
      	            return pst;
     	        }

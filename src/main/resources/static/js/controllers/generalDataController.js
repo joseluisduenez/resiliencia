@@ -87,7 +87,18 @@ app.controller('generalDataController' ,function($scope,ngTableParams,$filter,$w
 		var parameter = JSON.stringify($scope.generalData);
 		$http.post("/catalogs/addGeneralData", parameter) .then(function(response) {
 	    	console.log(response.data)
-			
+	    	   $mdDialog.show(
+					      $mdDialog.alert()
+					        .parent(angular.element(document.querySelector('#popupContainer')))
+					        .clickOutsideToClose(true)
+					        .title('Informacion')
+					        .textContent('Tu registro se ha realizado de forma satisfactoria.')
+					        .ariaLabel('Alert Dialog Demo')
+					        .ok('Salir')
+					        
+					    ).then(function(i){
+			    			//$window.location.href = '/';
+					      });
 			
 	    }, function(response) {
 	        //Second function handles error

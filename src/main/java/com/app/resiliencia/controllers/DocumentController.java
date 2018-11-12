@@ -84,8 +84,48 @@ public class DocumentController{
 	 
 	return 200;
 	}
+	
+	@RequestMapping(value = "/getDocuments", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<UserDocument>  getDocuments(
+
+
+			HttpSession session
+			,HttpServletRequest request
+	) throws JsonProcessingException {
+		User user =  (User) session.getAttribute("User");
+		List<UserDocument> UserDocument  = null;
+	try {
+		UserDocument = UserDocumentDao.getUserDocs(user.getId());		
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+       
+		
+	return UserDocument;
+	}
+	@RequestMapping(value = "/remove", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Integer removeCatalog(
+ 			@RequestParam("id") final Integer id,
+
+
+			HttpSession session
+			,HttpServletRequest request
+	) throws JsonProcessingException {
+		logger.info("removeFile -- : "+" id: "+id);
+	try {
+		UserDocumentDao.deleteDoc(id);
+
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+       
+		
+	return null;
+	}
     @RequestMapping(value="attachedImageInfo",method = RequestMethod.GET)
-    public Integer attachedImageInfo(@RequestParam("docName") final String docName,@RequestParam("comments") final String comments, HttpSession session, 
+    public Integer attachedImageInfo(@RequestParam("docName") final String docName,
+    		@RequestParam("comments") final String comments, HttpSession session, 
+    		@RequestParam("docType") final String docTypeId,
     		HttpServletRequest req,Model model) throws InterruptedException {
         logger.info("attachedImageInfo");
         User user =	null;
@@ -101,6 +141,7 @@ public class DocumentController{
         doc.setDocName(docName);
         doc.setFileName(user.getFileName());
         doc.setStatus(1);
+        doc.setDocType(docTypeId);
         UserDocumentDao.addDocument(doc);
         logger.info("Saving file... ");
 

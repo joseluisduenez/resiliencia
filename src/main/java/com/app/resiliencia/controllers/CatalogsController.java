@@ -11,6 +11,9 @@ import com.app.resiliencia.dto.ResponseLogin;
 import com.app.resiliencia.model.*;
 import com.app.resiliencia.resilienciaDao.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -212,6 +215,24 @@ public class CatalogsController{
 		
 	return catalogs;
 	}
+	@RequestMapping(value = "/getDocuments", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Catalog> getDocuments(
+ 			
+
+			HttpSession session
+			,HttpServletRequest request
+	) throws JsonProcessingException {
+		List<Catalog> catalogs  = null;
+	try {
+		catalogs = 	DocumentCatalogDao.getRows();
+	      
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+       
+		
+	return catalogs;
+	}
 	@RequestMapping(value = "/getArea", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Catalog> getArea(
  			
@@ -379,6 +400,9 @@ public class CatalogsController{
 		
 	return 200;
 	}
+	public String decode(String s) {
+	    return StringUtils.newStringUtf8(Base64.decodeBase64(s));
+	}
 	@RequestMapping(value = "/addCatalog", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Integer addCatalog(
  			@RequestParam("catalog") final Integer catalogid,
@@ -386,15 +410,22 @@ public class CatalogsController{
  			@RequestParam(value = "areaId", required=false) final String areaId,
  			@RequestParam(value = "subareaId", required=false) final String subAreaId,
  			@RequestParam(value = "preguntaId", required=false) final String preguntaId,
- 			@RequestParam(value = "ppregunta", required=false) final String ppregunta,
- 			@RequestParam(value = "spregunta", required=false) final String spregunta,
- 			@RequestParam(value = "tpregunta", required=false) final String tpregunta,
+ 			@RequestParam(value = "ppregunta", required=false)  String ppregunta,
+ 			@RequestParam(value = "spregunta", required=false)  String spregunta,
+ 			@RequestParam(value = "tpregunta", required=false)  String tpregunta,
 
 
 			HttpSession session
 			,HttpServletRequest request
 	) throws JsonProcessingException {
 		logger.info("catalog: "+catalogid+" name: "+name+" AreaId: "+areaId+ "SubAreaId: "+subAreaId+" preguntaId: "+preguntaId);
+		ppregunta=decode(ppregunta);
+		spregunta=decode(spregunta);
+		tpregunta=decode(tpregunta);
+		logger.info("ppregunta: "+ppregunta);
+		logger.info("spregunta: "+spregunta);
+		logger.info("tpregunta: "+tpregunta);
+
 	try {
 		Catalog catalog = new Catalog();
 		catalog.setName(name);
@@ -436,17 +467,31 @@ public class CatalogsController{
 			QuestionDao.addRow(catalog);
 			}
 		else if(catalogid.equals(11)) {
-			catalog.setId(ResponseDao.getId());
+			try {
 			catalog.setAreaId(Integer.decode(areaId));
 			catalog.setSubareaId(Integer.decode(subAreaId));
 			catalog.setQuestionid(Integer.decode(preguntaId));
+				if(ppregunta==null || ppregunta.equals(""))
+					throw new Exception("");
+			catalog.setId(ResponseDao.getId());
 			catalog.setName(ppregunta);
 			catalog.setNumber(1);
 			ResponseDao.addRow(catalog);
+			}catch(Exception e) {
+				
+			}
+			try {
+				if(spregunta==null  || spregunta.equals(""))
+					throw new Exception("");
 			catalog.setId(ResponseDao.getId());
 			catalog.setName(spregunta);
 			catalog.setNumber(2);
 			ResponseDao.addRow(catalog);
+			}catch(Exception e) {
+				
+			}
+			if(tpregunta==null || tpregunta.equals(""))
+				throw new Exception("");
 			catalog.setId(ResponseDao.getId());
 			catalog.setName(tpregunta);
 			catalog.setNumber(3);
@@ -468,13 +513,39 @@ public class CatalogsController{
 			HttpSession session
 			,HttpServletRequest request
 	) throws JsonProcessingException {
-		logger.info("catalog: "+catalogid+" name: "+id);
+		logger.info("removeCatalog -- catalog: "+catalogid+" id: "+id);
 	try {
 		
 		if(catalogid.equals(1)) {
 			ClasificationDao.removeRow(id);
 		}
-	      
+		else if(catalogid.equals(2)) {
+			  	PropertyDao.removeProperty(id);
+			}
+		else if(catalogid.equals(3)) {
+ 			  PositionDao.removeRow(id);
+			}
+		else if(catalogid.equals(5)) {
+ 			  DocumentCatalogDao.removeRow(id);
+			}
+		else if(catalogid.equals(6)) {
+ 			  IncomeSourceDao.removeRow(id);
+			}
+		else if(catalogid.equals(8)) {
+			logger.info("Area Dao if");
+ 			  AreaDao.removeRow(id);
+			}
+		else if(catalogid.equals(9)) {
+ 			 SubAreaDao.removeRow(id);
+			}
+		else if(catalogid.equals(10)) {
+			
+			QuestionDao.removeRow(id);
+			}
+		else if(catalogid.equals(11)) {
+			
+			ResponseDao.removeRow(id);
+			}
 	}catch(Exception e) {
 		e.printStackTrace();
 	}
@@ -616,11 +687,13 @@ public class CatalogsController{
 			,HttpServletRequest request
 	) throws JsonProcessingException {
 		logger.info("addGeneralData  : "+GeneralData.getComentarios());
+		logger.info("GeneralData{}",GeneralData);
 		GeneralData thereIsInfo	=	null;
 		try {
 
 	    	  thereIsInfo   = 	GeneralDataDao.getDataByUserId(GeneralData.getIdUser());
 	    	  if(thereIsInfo==null) {
+	    		  logger.info("is null adding info to generalDataDao");
 	    		  GeneralData.setId(GeneralDataDao.getId());
 	    		  GeneralDataDao.add(GeneralData);
 	    	  }else {

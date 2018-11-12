@@ -94,7 +94,7 @@ public class EncuestaDaoImpl implements EncuestaDao {
 		  		"from rs_area_catalog area\n" + 
 		  		"inner join  rs_subarea_catalog sub on sub.areaid = area.id \n" + 
 		  		"inner join rs_question question on question.subareaid = sub.id\n" + 
-		  		"inner join rs_response response on response.questionid = question.id",
+		  		"inner join rs_response response on response.questionid = question.id  ORDER BY area.id",
 	                new Object[] {}, new BeanPropertyRowMapper<Area>(Area.class));
 			for(int x=0; x<areas.size(); x++) {
 				areas.get(x).setSubarea(getSubAreas(areas.get(x).getId()));
